@@ -153,7 +153,6 @@ body::before, body::after { display: none; }
   flex:1;
   min-height:0;
 }
-.panels--hidden{ display:none !important; }
 #events-body{
   position:absolute;inset:0;
   display:none;
@@ -950,6 +949,60 @@ body::before, body::after { display: none; }
   display:flex;align-items:center;justify-content:space-between;
   flex-shrink:0;
 }
+
+/* ── Events hero ── */
+.ev-hero{
+  position:relative;width:100%;
+  height:48vh;min-height:260px;max-height:480px;
+  overflow:hidden;flex-shrink:0;
+}
+.ev-hero-img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.6s ease;
+}
+.ev-hero:hover .ev-hero-img{ transform:scale(1.04); }
+.ev-hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.72) 100%);
+}
+.ev-hero-content{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:2rem 4rem;
+}
+.ev-hero-text{
+  color:#fff;font-size:1rem;line-height:1.8;
+  max-width:680px;margin-bottom:1.6rem;
+  font-family:var(--ff-b);font-weight:400;
+}
+.ev-hero-btn{
+  display:inline-flex;align-items:center;
+  background:var(--bronze);color:#fff;
+  padding:0.75rem 2.2rem;
+  font-family:var(--ff-b);font-size:0.72rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  text-decoration:none;transition:background 0.2s;
+  border:none;cursor:pointer;
+}
+.ev-hero-btn:hover{ background:var(--bronze2); }
+
+/* ── Celebrations grid section ── */
+.ev-cel-section{
+  padding:2rem 3rem 2.5rem;
+  flex-shrink:0;
+}
+.ev-cel-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.2rem;
+}
+.ev-card-img img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.4s ease;
+}
+.ev-card:hover .ev-card-img img{ transform:scale(1.07); }
 .events-head{
   padding:1.2rem 3rem;
   border-bottom:1px solid rgba(255,255,255,0.08);
@@ -1328,6 +1381,8 @@ body::before, body::after { display: none; }
   .panels{height:auto;overflow:visible;}
   .panel{position:static;display:none;opacity:1;}
   .panel.active{display:block;}
+  #events-body{position:static;height:auto;}
+  #events-body.active{display:flex;flex-direction:column;overflow-y:visible;}
   #p-home,#p-about,#p-visit{grid-template-columns:1fr;}
   #p-about{grid-template-rows:auto auto auto auto;}
   .about-left{grid-column:1;grid-row:1;}
@@ -2473,6 +2528,9 @@ body::before, body::after { display: none; }
   /* ── VISIT ── */
   .section-visit { grid-template-columns: 1fr; }
   .ev-grid { grid-template-columns: repeat(2, 1fr); }
+  .ev-cel-grid { grid-template-columns: repeat(2, 1fr); }
+  .ev-cel-section { padding: 1.5rem 2rem 2rem; }
+  .ev-hero-content { padding: 2rem 3rem; }
   .visit-info {
     padding: 2.8rem 1.6rem 2rem;
     border-right: none;
@@ -4400,6 +4458,11 @@ body::before, body::after { display: none; }
   .footer-col { text-align: center; }
   .footer-social { justify-content: center; }
   .ev-grid-section { padding: 1.5rem 1.2rem 0.5rem; }
+  .ev-cel-section { padding: 1.2rem 1rem 1.5rem; }
+  .ev-cel-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .ev-hero { height: 55vw; min-height: 220px; }
+  .ev-hero-content { padding: 1.2rem 1.2rem; }
+  .ev-hero-text { font-size: 0.82rem; margin-bottom: 1rem; }
   .ev-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:0.75rem; padding-bottom:0.5rem; }
   .ev-card { flex:0 0 80%; scroll-snap-align:start; }
   .ev-upcoming-head { padding: 0.75rem 1.2rem 0.4rem; }
@@ -5149,143 +5212,90 @@ body::before, body::after { display: none; }
 
     <!-- EVENTS BODY (owned by Events tab, not the panels system) -->
     <div id="events-body">
-      <div class="events-head">
-        <div class="panel-eyebrow" style="margin-bottom:0;">Experiences &amp; Events</div>
+
+      <!-- ── Full-width hero ── -->
+      <div class="ev-hero">
+        <img class="ev-hero-img"
+          src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1800&q=85&auto=format&fit=crop"
+          alt="Celebrations at De Varsity Club" loading="eager" decoding="async" />
+        <div class="ev-hero-overlay"></div>
+        <div class="ev-hero-content">
+          <p class="ev-hero-text">Anniversaries, homecomings, graduations – celebrate life's milestones surrounded by the people you cherish. With unique venues and event experts at your service, we are here to help you plan the perfect celebration.</p>
+          <a href="https://wa.me/919842172020" class="ev-hero-btn" target="_blank">Enquire Now</a>
+        </div>
       </div>
 
-      <!-- Hilton-style portrait card grid -->
-      <div class="ev-grid-section">
-        <h2 class="ev-grid-heading">Plan a celebration <em>to remember</em></h2>
-        <div class="ev-grid">
+      <!-- ── Celebration cards grid ── -->
+      <div class="ev-cel-section">
+        <div class="ev-cel-grid">
 
           <div class="ev-card">
-            <div class="ev-card-img ev-card-img--music">
-              <span class="ev-card-ico">🎵</span>
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=600&q=80&auto=format&fit=crop" alt="Birthdays and anniversaries" loading="lazy" decoding="async" />
             </div>
-            <h3 class="ev-card-title">Live Music &amp; Cultural Nights</h3>
-            <p class="ev-card-desc">Immerse in live Carnatic and fusion performances every weekend. A feast for the ears as much as the palate.</p>
+            <h3 class="ev-card-title">Birthdays &amp; Anniversaries</h3>
+            <p class="ev-card-desc">Here's to another year! Celebrate special milestones with us, from sweet 16s to golden jubilees.</p>
             <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
           </div>
 
           <div class="ev-card">
-            <div class="ev-card-img ev-card-img--dining">
-              <span class="ev-card-ico">🍽</span>
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&q=80&auto=format&fit=crop" alt="Cultural celebrations" loading="lazy" decoding="async" />
             </div>
-            <h3 class="ev-card-title">Chef's Table Experience</h3>
-            <p class="ev-card-desc">An exclusive 7-course journey through Chettinad cuisine. Limited to 20 guests per evening — reserve early.</p>
-            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Reserve →</a>
+            <h3 class="ev-card-title">Cultural Celebrations</h3>
+            <p class="ev-card-desc">Whether you're planning a traditional ceremony or a cultural festival, we'll help you craft an extra special day.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
           </div>
 
           <div class="ev-card">
-            <div class="ev-card-img ev-card-img--workshop">
-              <span class="ev-card-ico">👩‍🍳</span>
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80&auto=format&fit=crop" alt="Reunions and homecomings" loading="lazy" decoding="async" />
             </div>
-            <h3 class="ev-card-title">Spice Masterclasses</h3>
-            <p class="ev-card-desc">Learn the art of stone-ground masalas and traditional Tamil cooking with Chef Murugan Pillai.</p>
-            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Book →</a>
+            <h3 class="ev-card-title">Reunions &amp; Homecomings</h3>
+            <p class="ev-card-desc">Make new memories with old friends — from long-awaited family reunions to homecoming celebrations.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
           </div>
 
           <div class="ev-card">
-            <div class="ev-card-img ev-card-img--celebrate">
-              <span class="ev-card-ico">🎉</span>
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&q=80&auto=format&fit=crop" alt="Holiday parties" loading="lazy" decoding="async" />
             </div>
-            <h3 class="ev-card-title">Private Celebrations</h3>
-            <p class="ev-card-desc">Birthdays, anniversaries, and corporate gatherings — we craft unforgettable events with private dining spaces.</p>
-            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Plan →</a>
+            <h3 class="ev-card-title">Holiday Parties</h3>
+            <p class="ev-card-desc">Host a holiday celebration everyone will talk about, or ring in the New Year in style with loved ones.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80&auto=format&fit=crop" alt="Candle light dinner" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="ev-card-title">Candle Light Dinner</h3>
+            <p class="ev-card-desc">An intimate evening under soft candlelight — perfect for proposals, anniversaries, or a quiet romantic escape.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&q=80&auto=format&fit=crop" alt="Special occasion" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="ev-card-title">Special Occasion</h3>
+            <p class="ev-card-desc">Life's best moments deserve an unforgettable setting. Whatever you're celebrating, we make it extraordinary.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&auto=format&fit=crop" alt="Meetings and conference" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="ev-card-title">Meetings &amp; Conference</h3>
+            <p class="ev-card-desc">Impress clients and energise your team in our fully-equipped AC hall and open-air theater — every detail handled.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
           </div>
 
         </div>
       </div>
 
-      <!-- Upcoming events list -->
-      <div class="ev-upcoming-head">
-        <div class="panel-eyebrow" style="margin-bottom:0;">What's On</div>
-        <a href="#" class="btn-ghost">View All →</a>
-      </div>
-      <div class="events-list">
-        <div class="ev-row">
-          <div class="ev-date">
-            <span class="ev-day">26</span>
-            <span class="ev-mon">Apr</span>
-          </div>
-          <div class="ev-info">
-            <span class="ev-type">🎵 Live Music</span>
-            <div class="ev-name">Carnatic Evening with Ravi Shankar Iyer</div>
-            <div class="ev-meta">
-              <span>🕖 7:00 PM</span>
-              <span>👥 Limited to 40 seats</span>
-              <span>📍 Main Dining Hall</span>
-            </div>
-          </div>
-          <div class="ev-action">
-            <span class="ev-price">Free</span>
-            <span class="ev-plbl">Entry</span>
-            <a href="https://wa.me/919876543210" class="ev-btn" target="_blank">RSVP →</a>
-          </div>
-        </div>
-        <div class="ev-row">
-          <div class="ev-date">
-            <span class="ev-day">01</span>
-            <span class="ev-mon">May</span>
-          </div>
-          <div class="ev-info">
-            <span class="ev-type">🍽 Chef's Table</span>
-            <div class="ev-name">Chettinad Feast Night — 7-Course Tasting Menu</div>
-            <div class="ev-meta">
-              <span>🕖 7:30 PM</span>
-              <span>👥 Only 20 guests</span>
-              <span>📍 Private Dining Room</span>
-            </div>
-          </div>
-          <div class="ev-action">
-            <span class="ev-price">₹1,200</span>
-            <span class="ev-plbl">Per Person</span>
-            <a href="https://wa.me/919876543210" class="ev-btn" target="_blank">Book →</a>
-          </div>
-        </div>
-        <div class="ev-row">
-          <div class="ev-date">
-            <span class="ev-day">10</span>
-            <span class="ev-mon">May</span>
-          </div>
-          <div class="ev-info">
-            <span class="ev-type">👩‍🍳 Workshop</span>
-            <div class="ev-name">Spice Blending Masterclass with Chef Murugan</div>
-            <div class="ev-meta">
-              <span>🕙 10:00 AM</span>
-              <span>👥 Max 15 participants</span>
-              <span>📍 Varsity Kitchen Studio</span>
-            </div>
-          </div>
-          <div class="ev-action">
-            <span class="ev-price">₹800</span>
-            <span class="ev-plbl">Per Person</span>
-            <a href="https://wa.me/919876543210" class="ev-btn" target="_blank">Book →</a>
-          </div>
-        </div>
-        <div class="ev-row">
-          <div class="ev-date">
-            <span class="ev-day">18</span>
-            <span class="ev-mon">May</span>
-          </div>
-          <div class="ev-info">
-            <span class="ev-type">🍷 Pairing Dinner</span>
-            <div class="ev-name">Tamil Cuisine &amp; Artisan Beverages Pairing Evening</div>
-            <div class="ev-meta">
-              <span>🕖 7:00 PM</span>
-              <span>👥 Couples &amp; small groups</span>
-              <span>📍 Rooftop Terrace</span>
-            </div>
-          </div>
-          <div class="ev-action">
-            <span class="ev-price">₹1,800</span>
-            <span class="ev-plbl">Per Couple</span>
-            <a href="https://wa.me/919876543210" class="ev-btn" target="_blank">Book →</a>
-          </div>
-        </div>
-      </div>
     </div>
-
 
 
     <!-- FACILITIES -->
@@ -6094,10 +6104,16 @@ cartRender(); // init
   const eventsBodyEl = document.getElementById('events-body');
 
   function activateBwTab(tabKey) {
-    const panelsVisible = tabKey === 'dine';
-    panelsEl.classList.toggle('panels--hidden', !panelsVisible);
-    if (eventsBodyEl) eventsBodyEl.classList.toggle('active', tabKey === 'events');
-    if (panelsVisible) switchPanel('home');
+    if (tabKey === 'dine') {
+      if (eventsBodyEl) eventsBodyEl.classList.remove('active');
+      switchPanel('home');
+    } else if (tabKey === 'events') {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      if (eventsBodyEl) eventsBodyEl.classList.add('active');
+    } else {
+      if (eventsBodyEl) eventsBodyEl.classList.remove('active');
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    }
   }
 
   document.querySelectorAll('.bw-tab').forEach(tab => {
