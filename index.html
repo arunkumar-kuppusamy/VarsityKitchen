@@ -946,6 +946,311 @@ body::before, body::after { display: none; }
   flex-shrink:0;
 }
 
+/* ── Menu Body (Cosmo-inspired cuisine cards) ── */
+#menu-body{
+  display:none;
+  flex-direction:column;
+  min-height:0;
+}
+#menu-body.active{ display:flex; }
+
+.menu-page-header{
+  text-align:center;
+  padding:4rem 2rem 2.5rem;
+  background:#0d0d0d;
+  border-bottom:1px solid rgba(237,34,38,0.15);
+}
+.menu-page-eyebrow{
+  font-family:var(--ff-b);font-size:0.7rem;font-weight:600;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--bronze);margin-bottom:0.75rem;
+}
+.menu-page-title{
+  font-family:var(--ff-d);font-size:3rem;font-weight:700;
+  color:#fff;line-height:1.05;margin-bottom:0.9rem;
+}
+.menu-page-title em{ color:var(--bronze);font-style:italic; }
+.menu-page-sub{
+  font-size:1rem;color:rgba(255,255,255,0.6);
+  line-height:1.75;max-width:600px;margin:0 auto;
+}
+
+.menu-cuisine-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:0;
+}
+.menu-cuisine-card{
+  display:flex;flex-direction:column;
+  border-right:1px solid rgba(255,255,255,0.06);
+  transition:background 0.3s;
+  background:#0d0d0d;
+}
+.menu-cuisine-card:last-child{ border-right:none; }
+.menu-cuisine-card:hover{ background:#111; }
+
+.menu-cuisine-img-wrap{
+  position:relative;
+  width:100%;aspect-ratio:16/9;
+  overflow:hidden;
+}
+.menu-cuisine-img-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.5s ease;
+}
+.menu-cuisine-card:hover .menu-cuisine-img-wrap img{ transform:scale(1.06); }
+.menu-cuisine-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(13,13,13,0.85) 100%);
+}
+.menu-cuisine-badge{
+  position:absolute;top:1.2rem;left:1.2rem;
+  font-family:var(--ff-b);font-size:0.58rem;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:#fff;background:var(--bronze);
+  padding:0.25rem 0.75rem;
+}
+
+.menu-cuisine-body{
+  padding:2rem 2.5rem 2.5rem;flex:1;
+  display:flex;flex-direction:column;
+  border-top:3px solid var(--bronze);
+}
+.menu-cuisine-number{
+  font-family:var(--ff-d);font-size:3.5rem;font-weight:700;
+  color:rgba(237,34,38,0.12);line-height:1;
+  margin-bottom:0.2rem;letter-spacing:-0.02em;
+}
+.menu-cuisine-title{
+  font-family:var(--ff-d);font-size:1.9rem;font-weight:700;
+  color:#fff;letter-spacing:0.02em;margin-bottom:0.4rem;
+  line-height:1.1;
+}
+.menu-cuisine-tagline{
+  font-family:var(--ff-b);font-size:0.88rem;font-style:italic;
+  color:var(--bronze);margin-bottom:1rem;letter-spacing:0.02em;
+}
+.menu-cuisine-desc{
+  font-size:0.88rem;line-height:1.8;
+  color:rgba(255,255,255,0.6);margin-bottom:1.4rem;flex:1;
+}
+.menu-cuisine-highlights{
+  display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.8rem;
+}
+.menu-cuisine-highlights span{
+  font-size:0.72rem;font-family:var(--ff-b);
+  color:rgba(255,255,255,0.65);
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:0.3rem 0.75rem;
+}
+.menu-cuisine-cta{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-family:var(--ff-d);font-size:0.82rem;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:#fff;text-decoration:none;
+  border-bottom:2px solid var(--bronze);
+  padding-bottom:0.2rem;
+  transition:color 0.2s, gap 0.2s;
+  width:fit-content;
+}
+.menu-cuisine-cta:hover{ color:var(--bronze); }
+.menu-cuisine-cta:hover .menu-cuisine-arrow{ transform:translateX(4px); }
+.menu-cuisine-arrow{ transition:transform 0.2s; display:inline-block; }
+
+.menu-page-cta{
+  display:flex;align-items:center;justify-content:space-between;
+  background:#111;border-top:3px solid var(--bronze);
+  padding:2rem 4rem;gap:2rem;flex-wrap:wrap;
+}
+.menu-page-cta-text{
+  font-size:1rem;color:rgba(255,255,255,0.75);font-style:italic;
+}
+.menu-page-cta-btn{
+  display:inline-flex;align-items:center;
+  background:var(--bronze);color:#fff;
+  padding:0.8rem 2.2rem;white-space:nowrap;
+  font-family:var(--ff-b);font-size:0.72rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  text-decoration:none;transition:background 0.2s;
+}
+.menu-page-cta-btn:hover{ background:var(--bronze2); }
+
+@media(max-width:768px){
+  .menu-cuisine-grid{ grid-template-columns:1fr; }
+  .menu-cuisine-card{ border-right:none;border-bottom:1px solid rgba(255,255,255,0.06); }
+  .menu-cuisine-card:last-child{ border-bottom:none; }
+  .menu-cuisine-body{ padding:1.5rem 1.2rem 2rem; }
+  .menu-cuisine-number{ font-size:2.5rem; }
+  .menu-cuisine-title{ font-size:1.5rem; }
+  .menu-page-header{ padding:2.5rem 1.2rem 2rem; }
+  .menu-page-title{ font-size:2.2rem; }
+  .menu-page-cta{ flex-direction:column;align-items:flex-start;padding:1.5rem 1.2rem; }
+  .menu-page-cta-btn{ width:100%;justify-content:center; }
+}
+/* ── Stay Body ── */
+#stay-body{
+  display:none;
+  flex-direction:column;
+  min-height:0;
+  overflow-y:auto;
+}
+#stay-body.active{ display:flex; }
+
+.stay-hero{
+  position:relative;width:100%;
+  height:52vh;min-height:300px;max-height:520px;
+  overflow:hidden;flex-shrink:0;
+}
+.stay-hero-img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.6s ease;
+}
+.stay-hero:hover .stay-hero-img{ transform:scale(1.04); }
+.stay-hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.78) 100%);
+}
+.stay-hero-content{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:flex-end;
+  padding:3rem 4rem;
+}
+.stay-hero-eyebrow{
+  font-family:var(--ff-b);font-size:0.7rem;font-weight:600;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--bronze);margin-bottom:0.6rem;
+}
+.stay-hero-title{
+  font-family:var(--ff-d);font-size:3rem;font-weight:700;
+  color:#fff;line-height:1.05;margin-bottom:0.9rem;letter-spacing:0.02em;
+}
+.stay-hero-title em{ color:var(--bronze);font-style:italic; }
+.stay-hero-sub{
+  color:rgba(255,255,255,0.82);font-size:1rem;line-height:1.7;
+  max-width:560px;margin-bottom:1.6rem;
+}
+.stay-hero-btn{
+  display:inline-flex;align-items:center;
+  background:var(--bronze);color:#fff;
+  padding:0.8rem 2.2rem;
+  font-family:var(--ff-b);font-size:0.72rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  text-decoration:none;transition:background 0.2s;
+}
+.stay-hero-btn:hover{ background:var(--bronze2); }
+
+.stay-features{
+  display:flex;flex-wrap:wrap;
+  background:#111;
+  border-bottom:1px solid rgba(237,34,38,0.2);
+  padding:0;
+}
+.stay-feat{
+  display:flex;align-items:center;gap:0.5rem;
+  flex:1;min-width:140px;
+  padding:1rem 1.5rem;
+  border-right:1px solid rgba(255,255,255,0.06);
+  font-family:var(--ff-b);font-size:0.78rem;font-weight:600;
+  letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.7);
+}
+.stay-feat:last-child{ border-right:none; }
+.stay-feat-ico{ font-size:1.1rem; }
+
+.stay-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  padding:3rem 4rem;
+  background:#0d0d0d;
+}
+.stay-card{
+  display:flex;flex-direction:column;
+  border:1px solid rgba(255,255,255,0.06);
+  transition:border-color 0.2s;
+}
+.stay-card:hover{ border-color:rgba(237,34,38,0.35); }
+.stay-card-img{
+  width:100%;aspect-ratio:16/10;overflow:hidden;
+}
+.stay-card-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.4s ease;
+}
+.stay-card:hover .stay-card-img img{ transform:scale(1.06); }
+.stay-card-body{
+  padding:1.5rem;flex:1;display:flex;flex-direction:column;
+}
+.stay-card-tag{
+  display:inline-block;
+  font-family:var(--ff-b);font-size:0.58rem;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--bronze);border:1px solid rgba(237,34,38,0.35);
+  padding:0.2rem 0.6rem;margin-bottom:0.75rem;
+}
+.stay-card-title{
+  font-family:var(--ff-d);font-size:1.3rem;font-weight:600;
+  color:#fff;margin-bottom:0.7rem;letter-spacing:0.02em;
+}
+.stay-card-desc{
+  font-size:0.84rem;line-height:1.65;color:rgba(255,255,255,0.6);
+  margin-bottom:1rem;flex:1;
+}
+.stay-card-amenities{
+  list-style:none;display:flex;flex-direction:column;gap:0.35rem;
+  margin-bottom:1.2rem;
+}
+.stay-card-amenities li{
+  font-size:0.78rem;color:rgba(255,255,255,0.55);
+}
+.stay-card-btn{
+  display:inline-flex;align-items:center;
+  font-family:var(--ff-b);font-size:0.65rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--bronze);text-decoration:none;
+  transition:letter-spacing 0.2s;
+}
+.stay-card-btn:hover{ letter-spacing:0.2em; }
+
+.stay-cta-banner{
+  display:flex;align-items:center;justify-content:space-between;
+  background:#111;border-top:3px solid var(--bronze);
+  padding:2.5rem 4rem;gap:2rem;flex-wrap:wrap;
+}
+.stay-cta-title{
+  font-family:var(--ff-d);font-size:1.8rem;font-weight:700;
+  color:#fff;margin-bottom:0.4rem;
+}
+.stay-cta-sub{
+  font-size:0.88rem;color:rgba(255,255,255,0.6);line-height:1.6;max-width:500px;
+}
+.stay-cta-btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--bronze);color:#fff;
+  padding:0.9rem 2.5rem;white-space:nowrap;
+  font-family:var(--ff-b);font-size:0.72rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  text-decoration:none;transition:background 0.2s;
+}
+.stay-cta-btn:hover{ background:var(--bronze2); }
+
+/* ── Stay responsive ── */
+@media(max-width:1024px){
+  .stay-grid{ grid-template-columns:1fr 1fr; padding:2rem; }
+}
+@media(max-width:768px){
+  .stay-hero{ height:56vw;min-height:260px; }
+  .stay-hero-content{ padding:1.5rem 1.2rem; }
+  .stay-hero-title{ font-size:1.9rem; }
+  .stay-hero-sub{ font-size:0.84rem;margin-bottom:1rem; }
+  .stay-grid{ grid-template-columns:1fr; padding:1.2rem 1rem; }
+  .stay-features{ flex-wrap:wrap; }
+  .stay-feat{ min-width:calc(50% - 0px);flex:0 0 50%; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .stay-cta-banner{ flex-direction:column;align-items:flex-start;padding:2rem 1.2rem; }
+  .stay-cta-btn{ width:100%;justify-content:center; }
+}
+
 /* ── Events hero ── */
 .ev-hero{
   position:relative;width:100%;
@@ -5388,6 +5693,182 @@ body::before, body::after { display: none; }
     </div>
 
 
+  <!-- STAY BODY — Service Apartments -->
+  <div id="stay-body">
+
+    <!-- Hero -->
+    <div class="stay-hero">
+      <img class="stay-hero-img"
+        src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1800&q=85&auto=format&fit=crop"
+        alt="De Varsity Club Service Apartments" loading="eager" decoding="async" />
+      <div class="stay-hero-overlay"></div>
+      <div class="stay-hero-content">
+        <div class="stay-hero-eyebrow">Accommodation · Salem</div>
+        <h1 class="stay-hero-title">Your Home<br><em>Away From Home</em></h1>
+        <p class="stay-hero-sub">Spacious, fully furnished service apartments nestled within the De Varsity Club estate — where premium comfort meets the warmth of Salem hospitality.</p>
+        <a href="https://wa.me/919842172020?text=Hi%20De%20Varsity%20Club!%20I%27d%20like%20to%20enquire%20about%20your%20service%20apartments." class="stay-hero-btn" target="_blank">Check Availability →</a>
+      </div>
+    </div>
+
+    <!-- Features strip -->
+    <div class="stay-features">
+      <div class="stay-feat"><span class="stay-feat-ico">🛏</span><span>Fully Furnished</span></div>
+      <div class="stay-feat"><span class="stay-feat-ico">📶</span><span>High-Speed Wi-Fi</span></div>
+      <div class="stay-feat"><span class="stay-feat-ico">❄️</span><span>Air Conditioned</span></div>
+      <div class="stay-feat"><span class="stay-feat-ico">🍽</span><span>In-Room Dining</span></div>
+      <div class="stay-feat"><span class="stay-feat-ico">🅿️</span><span>Free Parking</span></div>
+      <div class="stay-feat"><span class="stay-feat-ico">🔒</span><span>24/7 Security</span></div>
+    </div>
+
+    <!-- Image & text grid -->
+    <div class="stay-grid">
+
+      <div class="stay-card">
+        <div class="stay-card-img">
+          <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80&auto=format&fit=crop" alt="Deluxe Suite" loading="lazy" decoding="async" />
+        </div>
+        <div class="stay-card-body">
+          <div class="stay-card-tag">Most Popular</div>
+          <h3 class="stay-card-title">Deluxe Suite</h3>
+          <p class="stay-card-desc">Generously appointed rooms with king-size beds, premium linen, and a private balcony overlooking the lush garden. Ideal for couples and business travellers.</p>
+          <ul class="stay-card-amenities">
+            <li>👑 King-size bed</li>
+            <li>🛁 Private bathroom</li>
+            <li>🌿 Garden view balcony</li>
+            <li>📺 Smart TV</li>
+          </ul>
+          <a href="https://wa.me/919842172020?text=I%27d%20like%20to%20book%20the%20Deluxe%20Suite." class="stay-card-btn" target="_blank">Book Now →</a>
+        </div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-card-img">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80&auto=format&fit=crop" alt="Premium Apartment" loading="lazy" decoding="async" />
+        </div>
+        <div class="stay-card-body">
+          <div class="stay-card-tag">Family Stay</div>
+          <h3 class="stay-card-title">Premium Apartment</h3>
+          <p class="stay-card-desc">Spacious two-room apartments with a fully equipped kitchenette, living area, and separate bedrooms — perfect for extended stays and families.</p>
+          <ul class="stay-card-amenities">
+            <li>🛏 Two bedrooms</li>
+            <li>🍳 Kitchenette</li>
+            <li>🛋 Separate living room</li>
+            <li>👨‍👩‍👧 Family-friendly</li>
+          </ul>
+          <a href="https://wa.me/919842172020?text=I%27d%20like%20to%20book%20a%20Premium%20Apartment." class="stay-card-btn" target="_blank">Book Now →</a>
+        </div>
+      </div>
+
+      <div class="stay-card">
+        <div class="stay-card-img">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80&auto=format&fit=crop" alt="Executive Studio" loading="lazy" decoding="async" />
+        </div>
+        <div class="stay-card-body">
+          <div class="stay-card-tag">Short Stay</div>
+          <h3 class="stay-card-title">Executive Studio</h3>
+          <p class="stay-card-desc">A sleek, modern studio designed for the independent traveller — compact yet comfortable, with everything you need for a productive and restful stay.</p>
+          <ul class="stay-card-amenities">
+            <li>🖥 Work desk</li>
+            <li>☕ Coffee maker</li>
+            <li>🪟 City view</li>
+            <li>⚡ Fast check-in</li>
+          </ul>
+          <a href="https://wa.me/919842172020?text=I%27d%20like%20to%20book%20an%20Executive%20Studio." class="stay-card-btn" target="_blank">Book Now →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA banner -->
+    <div class="stay-cta-banner">
+      <div class="stay-cta-text">
+        <h2 class="stay-cta-title">Ready to check in?</h2>
+        <p class="stay-cta-sub">Contact us on WhatsApp for instant availability, pricing, and personalised recommendations.</p>
+      </div>
+      <a href="https://wa.me/919842172020?text=Hi%20De%20Varsity%20Club!%20I%27d%20like%20to%20enquire%20about%20your%20service%20apartments." class="stay-cta-btn" target="_blank">💬 WhatsApp Us</a>
+    </div>
+
+  </div>
+
+  <!-- MENU BODY -->
+  <div id="menu-body">
+
+    <!-- Page header -->
+    <div class="menu-page-header">
+      <div class="menu-page-eyebrow">Our Cuisine</div>
+      <h1 class="menu-page-title">A Journey of <em>Flavour</em></h1>
+      <p class="menu-page-sub">Two distinct culinary worlds united under one roof — each crafted with dedication, authenticity, and the finest ingredients Salem has to offer.</p>
+    </div>
+
+    <!-- Cuisine cards -->
+    <div class="menu-cuisine-grid">
+
+      <!-- Card 1: Heritage Indian -->
+      <div class="menu-cuisine-card" id="mcCard1">
+        <div class="menu-cuisine-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=900&q=85&auto=format&fit=crop"
+            alt="Heritage Indian Cuisine"
+            loading="lazy" decoding="async"
+          />
+          <div class="menu-cuisine-img-overlay"></div>
+          <span class="menu-cuisine-badge">Signature</span>
+        </div>
+        <div class="menu-cuisine-body">
+          <div class="menu-cuisine-number">01</div>
+          <h2 class="menu-cuisine-title">Heritage Indian</h2>
+          <p class="menu-cuisine-tagline">Bold, authentic spices from the North and South.</p>
+          <p class="menu-cuisine-desc">A culinary journey through India's most beloved regions — from the slow-cooked dum biryanis of Lucknow to the coconut-rich gravies of Tamil Nadu. Every dish is prepared with stone-ground spices, sourced locally, and cooked in the tradition of a grandmother's kitchen.</p>
+          <div class="menu-cuisine-highlights">
+            <span>🍛 Chettinad Curries</span>
+            <span>🍚 Dum Biryani</span>
+            <span>🌿 Tandoor Specialties</span>
+            <span>🥘 Dal & Breads</span>
+          </div>
+          <a href="https://wa.me/919842172020?text=I%27d%20like%20to%20know%20more%20about%20your%20Heritage%20Indian%20menu." class="menu-cuisine-cta" target="_blank">
+            Explore Menu <span class="menu-cuisine-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Indo-Thai & Indo-Chinese -->
+      <div class="menu-cuisine-card" id="mcCard2">
+        <div class="menu-cuisine-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=900&q=85&auto=format&fit=crop"
+            alt="Indo-Thai and Indo-Chinese Cuisine"
+            loading="lazy" decoding="async"
+          />
+          <div class="menu-cuisine-img-overlay"></div>
+          <span class="menu-cuisine-badge">Chef's Choice</span>
+        </div>
+        <div class="menu-cuisine-body">
+          <div class="menu-cuisine-number">02</div>
+          <h2 class="menu-cuisine-title">Indo-Thai &amp; Indo-Chinese</h2>
+          <p class="menu-cuisine-tagline">A sophisticated fusion of exotic zest and savory classics.</p>
+          <p class="menu-cuisine-desc">Where the boldness of Indian spices meets the delicate balance of Thai aromatics and the smoky depth of Chinese wok cuisine. Our fusion creations are designed to surprise and delight — a celebration of Asia on a single plate.</p>
+          <div class="menu-cuisine-highlights">
+            <span>🍜 Wok-Tossed Noodles</span>
+            <span>🌶 Thai Curries</span>
+            <span>🥡 Dim Sum</span>
+            <span>🔥 Indo-Chinese Starters</span>
+          </div>
+          <a href="https://wa.me/919842172020?text=I%27d%20like%20to%20know%20more%20about%20your%20Indo-Thai%20%26%20Indo-Chinese%20menu." class="menu-cuisine-cta" target="_blank">
+            Explore Menu <span class="menu-cuisine-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom CTA strip -->
+    <div class="menu-page-cta">
+      <p class="menu-page-cta-text">Dine in and let our chefs take you on an unforgettable journey.</p>
+      <a href="https://wa.me/919842172020?text=I%27d%20like%20to%20reserve%20a%20table%20at%20De%20Varsity%20Club." class="menu-page-cta-btn" target="_blank">Reserve a Table →</a>
+    </div>
+
+  </div>
+
   <!-- ═══ FOOTER ═══ -->
   <footer class="home-footer">
     <div class="footer-inner">
@@ -6100,17 +6581,26 @@ cartRender(); // init
   const panelsEl = document.querySelector('.panels');
   const eventsBodyEl = document.getElementById('events-body');
 
+  const stayBodyEl = document.getElementById('stay-body');
+
+  const menuBodyEl = document.getElementById('menu-body');
+
   function activateBwTab(tabKey) {
+    // Hide all tab bodies first
+    panelsEl.style.display = 'none';
+    if (eventsBodyEl) { eventsBodyEl.classList.remove('active'); eventsBodyEl.style.display = 'none'; }
+    if (stayBodyEl)   { stayBodyEl.classList.remove('active');   stayBodyEl.style.display = 'none'; }
+    if (menuBodyEl)   { menuBodyEl.classList.remove('active');   menuBodyEl.style.display = 'none'; }
+
     if (tabKey === 'dine') {
       panelsEl.style.display = '';
-      if (eventsBodyEl) { eventsBodyEl.classList.remove('active'); eventsBodyEl.style.display = 'none'; }
       switchPanel('home');
     } else if (tabKey === 'events') {
-      panelsEl.style.display = 'none';
       if (eventsBodyEl) { eventsBodyEl.classList.add('active'); eventsBodyEl.style.display = 'flex'; }
-    } else {
-      panelsEl.style.display = 'none';
-      if (eventsBodyEl) { eventsBodyEl.classList.remove('active'); eventsBodyEl.style.display = 'none'; }
+    } else if (tabKey === 'stay') {
+      if (stayBodyEl) { stayBodyEl.classList.add('active'); stayBodyEl.style.display = 'flex'; }
+    } else if (tabKey === 'menu') {
+      if (menuBodyEl) { menuBodyEl.classList.add('active'); menuBodyEl.style.display = 'flex'; }
     }
   }
 
