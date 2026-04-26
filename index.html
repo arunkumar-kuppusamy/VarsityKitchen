@@ -37,13 +37,12 @@
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;overflow:hidden;font-family:var(--ff-b);font-size:16px;-webkit-font-smoothing:antialiased;}
+html,body{font-family:var(--ff-b);font-size:16px;-webkit-font-smoothing:antialiased;}
 
 body{
   background:#0d0d0d;
   color:var(--ivory);
-  display:flex;
-  flex-direction:column;
+  overflow-y:auto;
 }
 
 body::before, body::after { display: none; }
@@ -51,9 +50,8 @@ body::before, body::after { display: none; }
 /* ── SHELL ── */
 .shell{
   display:grid;
-  grid-template-rows:auto auto 1fr auto;
-  height:100vh;
-  overflow:hidden;
+  grid-template-rows:auto auto auto auto;
+  min-height:100vh;
 }
 
 /* ── TOP BAR ── */
@@ -65,7 +63,8 @@ body::before, body::after { display: none; }
   height:76px;
   background:#111111;
   border-bottom:3px solid #ED2226;
-  position:relative;
+  position:sticky;
+  top:0;
   z-index:50;
   flex-shrink:0;
 }
@@ -149,17 +148,14 @@ body::before, body::after { display: none; }
 /* ── MAIN PANELS ── */
 .panels{
   position:relative;
-  overflow:hidden;
-  flex:1;
-  min-height:0;
 }
 #events-body{
-  position:absolute;inset:0;
   display:none;
   min-height:0;
+  overflow-y:auto;
+  flex-direction:column;
 }
 .panel{
-  position:absolute;inset:0;
   display:none;
   opacity:0;
   transition:opacity 0.45s ease;
@@ -1375,14 +1371,12 @@ body::before, body::after { display: none; }
 
 /* ── RESPONSIVE ── */
 @media(max-width:800px){
-  body{overflow-y:auto;}
-  html,body{height:auto;}
-  .shell{height:auto;grid-template-rows:auto auto auto;}
-  .panels{height:auto;overflow:visible;}
+  .shell{grid-template-rows:auto auto auto auto;}
+  .panels{}
   .panel{position:static;display:none;opacity:1;}
   .panel.active{display:block;}
-  #events-body{position:static;height:auto;}
-  #events-body.active{display:flex;flex-direction:column;overflow-y:visible;}
+  #events-body{min-height:0;}
+  #events-body.active{display:flex;flex-direction:column;overflow-y:auto;}
   #p-home,#p-about,#p-visit{grid-template-columns:1fr;}
   #p-about{grid-template-rows:auto auto auto auto;}
   .about-left{grid-column:1;grid-row:1;}
@@ -3620,7 +3614,8 @@ body::before, body::after { display: none; }
   background:#161616;
   border-bottom:2px solid var(--bronze);
   padding:0;
-  position:relative;
+  position:sticky;
+  top:76px;
   width:100%;
   flex-shrink:0;
   z-index:40;
@@ -4316,7 +4311,7 @@ body::before, body::after { display: none; }
   .topbar-wa { display: none; }
 
   /* ── BOOKING WIDGET ── */
-  .booking-widget { padding: 0; }
+  .booking-widget { padding: 0; top: 56px; }
   .bw-tab { padding: 0.7rem 0.5rem; font-size: 0.62rem; letter-spacing: 0.06em; gap: 0.3rem; }
   .bw-tab-ico { font-size: 0.85rem; }
   .bw-form.active { padding: 1.2rem 1.2rem 1.4rem; }
@@ -4860,59 +4855,6 @@ body::before, body::after { display: none; }
         </div>
       </section>
 
-      <!-- ═══ FOOTER ═══ -->
-      <footer class="home-footer">
-        <div class="footer-inner">
-          <!-- Brand column -->
-          <div class="footer-brand">
-            <div class="footer-brand-name">De Varsity Club</div>
-            <p class="footer-brand-tagline" style="font-size:0.92rem;color:rgba(255,255,255,0.4);line-height:1.7;margin-bottom:1.4rem;">Come for the food.<br>Stay for the ambiance.</p>
-            <div style="display:flex;gap:0.5rem;align-items:center;justify-content:center;margin-top:0.5rem;">
-              <span style="font-family:var(--ff-b);font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#fff;">Est. 2008 · Salem</span>
-            </div>
-            <div class="footer-social" style="display:flex;gap:0.6rem;margin-top:1rem;">
-              <a href="https://facebook.com/de.varsity.club" target="_blank" class="fsoc-link" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-              <a href="https://instagram.com/de.varsity.club" target="_blank" class="fsoc-link" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-              <a href="https://wa.me/919842172020" target="_blank" class="fsoc-link" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.118 1.528 5.854L0 24l6.344-1.488A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.854 0-3.6-.497-5.107-1.367l-.368-.217-3.766.884.946-3.658-.24-.381A9.942 9.942 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
-            </div>
-          </div>
-          <!-- Divider -->
-          <div class="footer-vdivider"></div>
-          <!-- Quick links -->
-          <div class="footer-col">
-            <div class="footer-col-title">Explore</div>
-            <ul class="footer-links">
-              <li><a href="#p-home"       onclick="switchPanel('home')">Home</a></li>
-              <li><a href="#p-menu"       onclick="switchPanel('menu')">Menu</a></li>
-              <li><a href="#p-about"      onclick="switchPanel('about')">About Us</a></li>
-              <li><a href="#p-events"     onclick="switchPanel('events')">Events</a></li>
-              <li><a href="#p-facilities" onclick="switchPanel('facilities')">Facilities</a></li>
-              <li><a href="#p-reserve"    onclick="switchPanel('reserve')">Reserve a Table</a></li>
-            </ul>
-          </div>
-          <!-- Divider -->
-          <div class="footer-vdivider"></div>
-          <!-- Contact -->
-          <div class="footer-col">
-            <div class="footer-col-title">Find Us</div>
-            <ul class="footer-contact-list">
-              <li><span class="fco-ico">📍</span><span>35/3, Vijaya Ragavachari Road,<br>Near SIMS Chellam Hospital,<br>Salem – 636007</span></li>
-              <li><span class="fco-ico">📞</span><a href="tel:+919842172020">+91 98421 72020</a></li>
-              <li><span class="fco-ico">✉</span><a href="mailto:varsityslm@gmail.com">varsityslm@gmail.com</a></li>
-              <li><span class="fco-ico">🕐</span><span>Open Daily · 11 AM – 11 PM</span></li>
-            </ul>
-          </div>
-        </div>
-        <!-- Bottom bar -->
-        <div style="border-top:1px solid rgba(255,255,255,0.06);padding:1rem 4rem;">
-          <div class="footer-bottom">
-            <span>© 2008 – 2025 De Varsity Club · Salem, Tamil Nadu · All rights reserved</span>
-            <span style="color:rgba(255,255,255,0.15);">|</span>
-            <span>Designed with ❤ for Salem's finest</span>
-          </div>
-        </div>
-      </footer>
-
     </div>
 
     
@@ -5210,92 +5152,7 @@ body::before, body::after { display: none; }
       </div>
     </div>
 
-    <!-- EVENTS BODY (owned by Events tab, not the panels system) -->
-    <div id="events-body">
 
-      <!-- ── Full-width hero ── -->
-      <div class="ev-hero">
-        <img class="ev-hero-img"
-          src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1800&q=85&auto=format&fit=crop"
-          alt="Celebrations at De Varsity Club" loading="eager" decoding="async" />
-        <div class="ev-hero-overlay"></div>
-        <div class="ev-hero-content">
-          <p class="ev-hero-text">Anniversaries, homecomings, graduations – celebrate life's milestones surrounded by the people you cherish. With unique venues and event experts at your service, we are here to help you plan the perfect celebration.</p>
-          <a href="https://wa.me/919842172020" class="ev-hero-btn" target="_blank">Enquire Now</a>
-        </div>
-      </div>
-
-      <!-- ── Celebration cards grid ── -->
-      <div class="ev-cel-section">
-        <div class="ev-cel-grid">
-
-          <div class="ev-card">
-            <div class="ev-card-img">
-              <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=600&q=80&auto=format&fit=crop" alt="Birthdays and anniversaries" loading="lazy" decoding="async" />
-            </div>
-            <h3 class="ev-card-title">Birthdays &amp; Anniversaries</h3>
-            <p class="ev-card-desc">Here's to another year! Celebrate special milestones with us, from sweet 16s to golden jubilees.</p>
-            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
-          </div>
-
-          <div class="ev-card">
-            <div class="ev-card-img">
-              <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&q=80&auto=format&fit=crop" alt="Cultural celebrations" loading="lazy" decoding="async" />
-            </div>
-            <h3 class="ev-card-title">Cultural Celebrations</h3>
-            <p class="ev-card-desc">Whether you're planning a traditional ceremony or a cultural festival, we'll help you craft an extra special day.</p>
-            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
-          </div>
-
-          <div class="ev-card">
-            <div class="ev-card-img">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80&auto=format&fit=crop" alt="Reunions and homecomings" loading="lazy" decoding="async" />
-            </div>
-            <h3 class="ev-card-title">Reunions &amp; Homecomings</h3>
-            <p class="ev-card-desc">Make new memories with old friends — from long-awaited family reunions to homecoming celebrations.</p>
-            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
-          </div>
-
-          <div class="ev-card">
-            <div class="ev-card-img">
-              <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&q=80&auto=format&fit=crop" alt="Holiday parties" loading="lazy" decoding="async" />
-            </div>
-            <h3 class="ev-card-title">Holiday Parties</h3>
-            <p class="ev-card-desc">Host a holiday celebration everyone will talk about, or ring in the New Year in style with loved ones.</p>
-            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
-          </div>
-
-          <div class="ev-card">
-            <div class="ev-card-img">
-              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80&auto=format&fit=crop" alt="Candle light dinner" loading="lazy" decoding="async" />
-            </div>
-            <h3 class="ev-card-title">Candle Light Dinner</h3>
-            <p class="ev-card-desc">An intimate evening under soft candlelight — perfect for proposals, anniversaries, or a quiet romantic escape.</p>
-            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
-          </div>
-
-          <div class="ev-card">
-            <div class="ev-card-img">
-              <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&q=80&auto=format&fit=crop" alt="Special occasion" loading="lazy" decoding="async" />
-            </div>
-            <h3 class="ev-card-title">Special Occasion</h3>
-            <p class="ev-card-desc">Life's best moments deserve an unforgettable setting. Whatever you're celebrating, we make it extraordinary.</p>
-            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
-          </div>
-
-          <div class="ev-card">
-            <div class="ev-card-img">
-              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&auto=format&fit=crop" alt="Meetings and conference" loading="lazy" decoding="async" />
-            </div>
-            <h3 class="ev-card-title">Meetings &amp; Conference</h3>
-            <p class="ev-card-desc">Impress clients and energise your team in our fully-equipped AC hall and open-air theater — every detail handled.</p>
-            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
 
 
     <!-- FACILITIES -->
@@ -5442,7 +5299,147 @@ body::before, body::after { display: none; }
 
   </main>
 
-  </main><!-- panels already closed above -->
+  <!-- EVENTS BODY — sibling of .panels, outside panel :target system -->
+    <!-- EVENTS BODY (owned by Events tab, not the panels system) -->
+    <div id="events-body">
+
+      <!-- ── Full-width hero ── -->
+      <div class="ev-hero">
+        <img class="ev-hero-img"
+          src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1800&q=85&auto=format&fit=crop"
+          alt="Celebrations at De Varsity Club" loading="eager" decoding="async" />
+        <div class="ev-hero-overlay"></div>
+        <div class="ev-hero-content">
+          <p class="ev-hero-text">Anniversaries, homecomings, graduations – celebrate life's milestones surrounded by the people you cherish. With unique venues and event experts at your service, we are here to help you plan the perfect celebration.</p>
+          <a href="https://wa.me/919842172020" class="ev-hero-btn" target="_blank">Enquire Now</a>
+        </div>
+      </div>
+
+      <!-- ── Celebration cards grid ── -->
+      <div class="ev-cel-section">
+        <div class="ev-cel-grid">
+
+          <div class="ev-card">
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=600&q=80&auto=format&fit=crop" alt="Birthdays and anniversaries" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="ev-card-title">Birthdays &amp; Anniversaries</h3>
+            <p class="ev-card-desc">Here's to another year! Celebrate special milestones with us, from sweet 16s to golden jubilees.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&q=80&auto=format&fit=crop" alt="Cultural celebrations" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="ev-card-title">Cultural Celebrations</h3>
+            <p class="ev-card-desc">Whether you're planning a traditional ceremony or a cultural festival, we'll help you craft an extra special day.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80&auto=format&fit=crop" alt="Reunions and homecomings" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="ev-card-title">Reunions &amp; Homecomings</h3>
+            <p class="ev-card-desc">Make new memories with old friends — from long-awaited family reunions to homecoming celebrations.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&q=80&auto=format&fit=crop" alt="Holiday parties" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="ev-card-title">Holiday Parties</h3>
+            <p class="ev-card-desc">Host a holiday celebration everyone will talk about, or ring in the New Year in style with loved ones.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80&auto=format&fit=crop" alt="Candle light dinner" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="ev-card-title">Candle Light Dinner</h3>
+            <p class="ev-card-desc">An intimate evening under soft candlelight — perfect for proposals, anniversaries, or a quiet romantic escape.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&q=80&auto=format&fit=crop" alt="Special occasion" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="ev-card-title">Special Occasion</h3>
+            <p class="ev-card-desc">Life's best moments deserve an unforgettable setting. Whatever you're celebrating, we make it extraordinary.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&auto=format&fit=crop" alt="Meetings and conference" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="ev-card-title">Meetings &amp; Conference</h3>
+            <p class="ev-card-desc">Impress clients and energise your team in our fully-equipped AC hall and open-air theater — every detail handled.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="home-footer">
+    <div class="footer-inner">
+      <!-- Brand column -->
+      <div class="footer-brand">
+        <div class="footer-brand-name">De Varsity Club</div>
+        <p class="footer-brand-tagline" style="font-size:0.92rem;color:rgba(255,255,255,0.4);line-height:1.7;margin-bottom:1.4rem;">Come for the food.<br>Stay for the ambiance.</p>
+        <div style="display:flex;gap:0.5rem;align-items:center;justify-content:center;margin-top:0.5rem;">
+          <span style="font-family:var(--ff-b);font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#fff;">Est. 2008 · Salem</span>
+        </div>
+        <div class="footer-social" style="display:flex;gap:0.6rem;margin-top:1rem;">
+          <a href="https://facebook.com/de.varsity.club" target="_blank" class="fsoc-link" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://instagram.com/de.varsity.club" target="_blank" class="fsoc-link" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://wa.me/919842172020" target="_blank" class="fsoc-link" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.118 1.528 5.854L0 24l6.344-1.488A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.854 0-3.6-.497-5.107-1.367l-.368-.217-3.766.884.946-3.658-.24-.381A9.942 9.942 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+        </div>
+      </div>
+      <!-- Divider -->
+      <div class="footer-vdivider"></div>
+      <!-- Quick links -->
+      <div class="footer-col">
+        <div class="footer-col-title">Explore</div>
+        <ul class="footer-links">
+          <li><a href="#" onclick="document.querySelector('.bw-tab[data-tab=dine]').click();return false;">Home</a></li>
+          <li><a href="#p-menu"       onclick="switchPanel('menu')">Menu</a></li>
+          <li><a href="#p-about"      onclick="switchPanel('about')">About Us</a></li>
+          <li><a href="#" onclick="document.querySelector('.bw-tab[data-tab=events]').click();return false;">Events</a></li>
+          <li><a href="#p-facilities" onclick="switchPanel('facilities')">Facilities</a></li>
+          <li><a href="#p-reserve"    onclick="switchPanel('reserve')">Reserve a Table</a></li>
+        </ul>
+      </div>
+      <!-- Divider -->
+      <div class="footer-vdivider"></div>
+      <!-- Contact -->
+      <div class="footer-col">
+        <div class="footer-col-title">Find Us</div>
+        <ul class="footer-contact-list">
+          <li><span class="fco-ico">📍</span><span>35/3, Vijaya Ragavachari Road,<br>Near SIMS Chellam Hospital,<br>Salem – 636007</span></li>
+          <li><span class="fco-ico">📞</span><a href="tel:+919842172020">+91 98421 72020</a></li>
+          <li><span class="fco-ico">✉</span><a href="mailto:varsityslm@gmail.com">varsityslm@gmail.com</a></li>
+          <li><span class="fco-ico">🕐</span><span>Open Daily · 11 AM – 11 PM</span></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Bottom bar -->
+    <div style="border-top:1px solid rgba(255,255,255,0.06);padding:1rem 4rem;">
+      <div class="footer-bottom">
+        <span>© 2008 – 2025 De Varsity Club · Salem, Tamil Nadu · All rights reserved</span>
+        <span style="color:rgba(255,255,255,0.15);">|</span>
+        <span>Designed with ❤ for Salem's finest</span>
+      </div>
+    </div>
+  </footer>
 
 </div>
 
@@ -6105,14 +6102,15 @@ cartRender(); // init
 
   function activateBwTab(tabKey) {
     if (tabKey === 'dine') {
-      if (eventsBodyEl) eventsBodyEl.classList.remove('active');
+      panelsEl.style.display = '';
+      if (eventsBodyEl) { eventsBodyEl.classList.remove('active'); eventsBodyEl.style.display = 'none'; }
       switchPanel('home');
     } else if (tabKey === 'events') {
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      if (eventsBodyEl) eventsBodyEl.classList.add('active');
+      panelsEl.style.display = 'none';
+      if (eventsBodyEl) { eventsBodyEl.classList.add('active'); eventsBodyEl.style.display = 'flex'; }
     } else {
-      if (eventsBodyEl) eventsBodyEl.classList.remove('active');
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      panelsEl.style.display = 'none';
+      if (eventsBodyEl) { eventsBodyEl.classList.remove('active'); eventsBodyEl.style.display = 'none'; }
     }
   }
 
@@ -6121,6 +6119,7 @@ cartRender(); // init
       document.querySelectorAll('.bw-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       activateBwTab(tab.dataset.tab);
+      window.scrollTo({ top: 0, behavior: 'instant' });
     });
   });
 
