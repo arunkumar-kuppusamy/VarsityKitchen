@@ -153,6 +153,12 @@ body::before, body::after { display: none; }
   flex:1;
   min-height:0;
 }
+.panels--hidden{ display:none !important; }
+#events-body{
+  position:absolute;inset:0;
+  display:none;
+  min-height:0;
+}
 .panel{
   position:absolute;inset:0;
   display:none;
@@ -873,7 +879,77 @@ body::before, body::after { display: none; }
 .menu-footer-note{font-size:0.65rem;color:var(--dim);letter-spacing:0.08em;}
 
 /* ── EVENTS PANEL ── */
-#p-events{grid-template-rows:auto 1fr;}
+#events-body.active{display:flex!important;flex-direction:column;overflow-y:auto;}
+
+/* ── EVENTS GRID (Hilton-style portrait cards) ── */
+.ev-grid-section{padding:2rem 3rem 1.5rem;flex-shrink:0;}
+.ev-grid-heading{
+  font-family:var(--ff-d);font-size:1.6rem;font-weight:600;
+  color:#fff;margin-bottom:1.5rem;letter-spacing:0.02em;
+}
+.ev-grid-heading em{color:var(--bronze);font-style:italic;}
+.ev-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
+}
+.ev-card{
+  position:relative;display:flex;flex-direction:column;
+  height:100%;padding-bottom:1.25rem;cursor:pointer;
+}
+.ev-card-img{
+  position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;
+  border-radius:4px;display:flex;align-items:center;justify-content:center;
+  margin-bottom:0.75rem;transition:opacity 0.3s ease;
+}
+.ev-card:hover .ev-card-img{opacity:0.82;}
+.ev-card-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.55) 0%,transparent 50%);
+  border-radius:4px;
+}
+.ev-card-img--music{
+  background:linear-gradient(150deg,#1a0808 0%,#2d0d0d 50%,#140404 100%);
+  border:1px solid rgba(237,34,38,0.18);
+}
+.ev-card-img--dining{
+  background:linear-gradient(150deg,#12100a 0%,#2a1e08 50%,#1a1205 100%);
+  border:1px solid rgba(212,136,42,0.18);
+}
+.ev-card-img--workshop{
+  background:linear-gradient(150deg,#070f0a 0%,#0e2018 50%,#061510 100%);
+  border:1px solid rgba(42,180,100,0.13);
+}
+.ev-card-img--celebrate{
+  background:linear-gradient(150deg,#0c0515 0%,#18092c 50%,#0d0519 100%);
+  border:1px solid rgba(160,100,220,0.18);
+}
+.ev-card-ico{
+  font-size:3.8rem;position:relative;z-index:1;
+  transition:transform 0.3s ease;
+  filter:drop-shadow(0 4px 20px rgba(0,0,0,0.6));
+}
+.ev-card:hover .ev-card-ico{transform:scale(1.12);}
+.ev-card-title{
+  font-family:var(--ff-d);font-size:1rem;font-weight:600;
+  color:#fff;margin:0.4rem 0 0.5rem;letter-spacing:0.02em;
+}
+.ev-card-desc{
+  font-size:0.82rem;line-height:1.65;color:rgba(255,255,255,0.6);
+}
+.ev-card-cta{
+  display:inline-flex;align-items:center;gap:0.35rem;
+  margin-top:0.9rem;
+  font-family:var(--ff-b);font-size:0.65rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--bronze);text-decoration:none;
+  transition:gap 0.2s;
+}
+.ev-card-cta:hover{gap:0.55rem;}
+.ev-upcoming-head{
+  padding:1rem 3rem 0.5rem;
+  border-top:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
 .events-head{
   padding:1.2rem 3rem;
   border-bottom:1px solid rgba(255,255,255,0.08);
@@ -2396,6 +2472,7 @@ body::before, body::after { display: none; }
 
   /* ── VISIT ── */
   .section-visit { grid-template-columns: 1fr; }
+  .ev-grid { grid-template-columns: repeat(2, 1fr); }
   .visit-info {
     padding: 2.8rem 1.6rem 2rem;
     border-right: none;
@@ -4322,6 +4399,10 @@ body::before, body::after { display: none; }
   .footer-brand { text-align: center; }
   .footer-col { text-align: center; }
   .footer-social { justify-content: center; }
+  .ev-grid-section { padding: 1.5rem 1.2rem 0.5rem; }
+  .ev-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:0.75rem; padding-bottom:0.5rem; }
+  .ev-card { flex:0 0 80%; scroll-snap-align:start; }
+  .ev-upcoming-head { padding: 0.75rem 1.2rem 0.4rem; }
   .footer-links { justify-content: center !important; }
 }
 
@@ -4372,100 +4453,6 @@ body::before, body::after { display: none; }
 
 
 
-      <!-- STAY form -->
-      <div class="bw-form" id="bw-stay">
-        <div class="bw-fields">
-          <div class="bw-field">
-            <label>Check-In</label>
-            <input type="date" id="stayIn" />
-          </div>
-          <div class="bw-field">
-            <label>Check-Out</label>
-            <input type="date" id="stayOut" />
-          </div>
-          <div class="bw-field">
-            <label>Guests</label>
-            <select id="stayGuests">
-              <option>1 Guest</option><option>2 Guests</option>
-              <option>3 Guests</option><option>4 Guests</option>
-            </select>
-          </div>
-          <button class="bw-btn" onclick="bwBook('stay')">Check Availability →</button>
-        </div>
-      </div>
-
-      <!-- EVENTS form -->
-      <div class="bw-form" id="bw-events">
-        <div class="bw-fields bw-fields--events">
-          <!-- Event type selector -->
-          <div class="bw-event-types" id="bwEventTypes">
-            <button class="bw-et-card active" data-event="meeting">
-              <span class="bw-et-ico">💼</span>
-              <span class="bw-et-lbl">Meeting &amp; Conference</span>
-            </button>
-            <button class="bw-et-card" data-event="birthday">
-              <span class="bw-et-ico">🎂</span>
-              <span class="bw-et-lbl">Birthday Celebration</span>
-            </button>
-            <button class="bw-et-card" data-event="wedding">
-              <span class="bw-et-ico">💍</span>
-              <span class="bw-et-lbl">Wedding &amp; Reception</span>
-            </button>
-            <button class="bw-et-card" data-event="getogether">
-              <span class="bw-et-ico">🥂</span>
-              <span class="bw-et-lbl">Get-Together</span>
-            </button>
-            <button class="bw-et-card" data-event="candle">
-              <span class="bw-et-ico">🕯️</span>
-              <span class="bw-et-lbl">Candle Light Dinner</span>
-            </button>
-            <button class="bw-et-card" data-event="special">
-              <span class="bw-et-ico">✨</span>
-              <span class="bw-et-lbl">Special Occasion</span>
-            </button>
-          </div>
-          <!-- Sub-fields row -->
-          <div class="bw-event-fields">
-            <div class="bw-field">
-              <label>Date</label>
-              <input type="date" id="evDate" />
-            </div>
-            <div class="bw-field">
-              <label>Guests</label>
-              <select id="evGuests">
-                <option>Up to 10</option><option>10–25</option>
-                <option>25–50</option><option>50–100</option>
-                <option>100–200</option><option>200+</option>
-              </select>
-            </div>
-            <div class="bw-field">
-              <label>Venue Preference</label>
-              <select id="evVenue">
-                <option>Any Venue</option>
-                <option>Open Air Theater</option>
-                <option>Garden Banquet Hall</option>
-                <option>Mini AC Hall</option>
-                <option>Pool Side Lawn</option>
-              </select>
-            </div>
-            <button class="bw-btn" onclick="bwBook('events')">Enquire Now →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- MENU form -->
-      <div class="bw-form" id="bw-menu">
-        <div class="bw-fields bw-fields--menu">
-          <div class="bw-menu-cats">
-            <button class="bw-mc active" data-cat="starters" onclick="switchPanel('menu')">🦀 Starters</button>
-            <button class="bw-mc" data-cat="mains" onclick="switchPanel('menu')">🍗 Mains</button>
-            <button class="bw-mc" data-cat="biriyani" onclick="switchPanel('menu')">🍛 Biriyani</button>
-            <button class="bw-mc" data-cat="desserts" onclick="switchPanel('menu')">🫘 Desserts</button>
-          </div>
-          <button class="bw-btn" onclick="switchPanel('menu')">Browse Full Menu →</button>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -4474,6 +4461,9 @@ body::before, body::after { display: none; }
 
 <!-- HOME -->
     <div class="panel active" id="p-home">
+
+
+
 
       <!-- ═══ 1. HERO ═══ -->
       <section class="hero">
@@ -4488,7 +4478,6 @@ body::before, body::after { display: none; }
             <a href="#p-reserve" class="cta-primary" onclick="switchPanel('reserve')">Reserve Table</a>
             <a href="#p-menu"    class="cta-secondary" onclick="switchPanel('menu')">View Menu →</a>
           </div>
-
           <div class="hero-trust">
             <div class="trust-item"><span class="trust-ico">✦</span><span class="trust-val">4.8</span>&nbsp;Rating</div>
             <div class="trust-item"><span class="trust-ico">◈</span>&nbsp;Multi-Cuisine</div>
@@ -4497,7 +4486,6 @@ body::before, body::after { display: none; }
           </div>
         </div>
         <div class="hero-right">
-          <!-- Photo zone — pure visual, no text on top -->
           <div class="hero-photo-wrap">
             <img
               class="hero-photo"
@@ -4508,15 +4496,10 @@ body::before, body::after { display: none; }
             />
             <div class="hero-photo-overlay"></div>
           </div>
-
-          <!-- Info strip — clean dark panel, full readability guaranteed -->
           <div class="hero-info-panel">
             <div class="hip-glow"></div>
-
-            <!-- Hours + Cuisine in one row -->
             <div class="hip-block hip-block--hours">
               <div class="hip-hours-cuisine-row">
-                <!-- Left: Today's Hours -->
                 <div class="hip-hours-col">
                   <div class="hip-label">Today's Hours</div>
                   <div class="hip-hours-row">
@@ -4524,9 +4507,7 @@ body::before, body::after { display: none; }
                     <span class="hip-time" id="todayTimeHero">—</span>
                   </div>
                 </div>
-                <!-- Divider -->
                 <div class="hip-vert-divider"></div>
-                <!-- Right: Cuisine -->
                 <div class="hip-cuisine-col">
                   <div class="hip-label">Cuisine</div>
                   <div class="hip-cuisine-pills">
@@ -4537,8 +4518,6 @@ body::before, body::after { display: none; }
                 </div>
               </div>
             </div>
-
-            <!-- Facilities full-width -->
             <div class="hip-grid">
               <div class="hip-block" style="grid-column:1/-1;padding-top:0.8rem;">
                 <div class="hip-label">Facilities</div>
@@ -4555,8 +4534,6 @@ body::before, body::after { display: none; }
           </div><!-- /hero-info-panel -->
         </div><!-- /hero-right -->
       </section><!-- /hero -->
-
-
 
       <div class="section-divider"></div>
 
@@ -5170,11 +5147,60 @@ body::before, body::after { display: none; }
       </div>
     </div>
 
-    <!-- EVENTS -->
-    <div class="panel" id="p-events">
+    <!-- EVENTS BODY (owned by Events tab, not the panels system) -->
+    <div id="events-body">
       <div class="events-head">
+        <div class="panel-eyebrow" style="margin-bottom:0;">Experiences &amp; Events</div>
+      </div>
+
+      <!-- Hilton-style portrait card grid -->
+      <div class="ev-grid-section">
+        <h2 class="ev-grid-heading">Plan a celebration <em>to remember</em></h2>
+        <div class="ev-grid">
+
+          <div class="ev-card">
+            <div class="ev-card-img ev-card-img--music">
+              <span class="ev-card-ico">🎵</span>
+            </div>
+            <h3 class="ev-card-title">Live Music &amp; Cultural Nights</h3>
+            <p class="ev-card-desc">Immerse in live Carnatic and fusion performances every weekend. A feast for the ears as much as the palate.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Enquire →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img ev-card-img--dining">
+              <span class="ev-card-ico">🍽</span>
+            </div>
+            <h3 class="ev-card-title">Chef's Table Experience</h3>
+            <p class="ev-card-desc">An exclusive 7-course journey through Chettinad cuisine. Limited to 20 guests per evening — reserve early.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Reserve →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img ev-card-img--workshop">
+              <span class="ev-card-ico">👩‍🍳</span>
+            </div>
+            <h3 class="ev-card-title">Spice Masterclasses</h3>
+            <p class="ev-card-desc">Learn the art of stone-ground masalas and traditional Tamil cooking with Chef Murugan Pillai.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Book →</a>
+          </div>
+
+          <div class="ev-card">
+            <div class="ev-card-img ev-card-img--celebrate">
+              <span class="ev-card-ico">🎉</span>
+            </div>
+            <h3 class="ev-card-title">Private Celebrations</h3>
+            <p class="ev-card-desc">Birthdays, anniversaries, and corporate gatherings — we craft unforgettable events with private dining spaces.</p>
+            <a href="https://wa.me/919842172020" class="ev-card-cta" target="_blank">Plan →</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Upcoming events list -->
+      <div class="ev-upcoming-head">
         <div class="panel-eyebrow" style="margin-bottom:0;">What's On</div>
-        <a href="#" class="btn-ghost">View All Events →</a>
+        <a href="#" class="btn-ghost">View All →</a>
       </div>
       <div class="events-list">
         <div class="ev-row">
@@ -6064,15 +6090,26 @@ cartRender(); // init
 /* ═══ BOOKING WIDGET ═══ */
 (function(){
   // Tab switching
+  const panelsEl = document.querySelector('.panels');
+  const eventsBodyEl = document.getElementById('events-body');
+
+  function activateBwTab(tabKey) {
+    const panelsVisible = tabKey === 'dine';
+    panelsEl.classList.toggle('panels--hidden', !panelsVisible);
+    if (eventsBodyEl) eventsBodyEl.classList.toggle('active', tabKey === 'events');
+    if (panelsVisible) switchPanel('home');
+  }
+
   document.querySelectorAll('.bw-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.bw-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.bw-form').forEach(f => f.classList.remove('active'));
       tab.classList.add('active');
-      const form = document.getElementById('bw-' + tab.dataset.tab);
-      if(form) form.classList.add('active');
+      activateBwTab(tab.dataset.tab);
     });
   });
+
+  // Init: show panels for default active tab (dine)
+  activateBwTab('dine');
 
   // Event type card selection
   document.querySelectorAll('.bw-et-card').forEach(card => {
