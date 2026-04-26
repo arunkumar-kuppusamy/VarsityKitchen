@@ -37,7 +37,7 @@
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;overflow:hidden;font-family:var(--ff-b);font-size:16px;-webkit-font-smoothing:antialiased;}
+html,body{height:100%;overflow:auto;font-family:var(--ff-b);font-size:16px;-webkit-font-smoothing:antialiased;}
 
 body{
   background:#0d0d0d;
@@ -102,11 +102,11 @@ body::before, body::after { display: none; }
   text-decoration:none;
   border-right:1px solid rgba(255,255,255,0.06);
   transition:color 0.18s, background 0.18s;
-  cursor:pointer;background:transparent;border-top:none;border-bottom:none;border-left:none;
+  cursor:pointer;background:rgba(255,255,255,0.1);border-top:none;border-bottom:none;border-left:none;
   position:relative;
   white-space:nowrap;
 }
-.topbar-nav-link:hover{ color:#fff; background:rgba(255,255,255,0.04); }
+.topbar-nav-link:hover{ color:#fff; background:rgba(255,255,255,0.2); }
 .topbar-nav-link.active{ color:#fff; }
 .topbar-nav-link.active::after{
   content:'';position:absolute;bottom:-3px;left:0;right:0;
@@ -1460,10 +1460,10 @@ body::before, body::after { display: none; }
 .hero{
   display:grid;
   grid-template-columns:1fr 1fr;
-  min-height:92vh;
+  min-height:60vh;
   border-bottom:2px solid var(--bronze);
   position:relative;
-  overflow:hidden;
+  overflow:visible;
   background:#0d0d0d;
   column-gap:0;
 }
@@ -1566,10 +1566,10 @@ body::before, body::after { display: none; }
 .trust-item{
   display:flex;align-items:center;gap:0.5rem;
   font-size:0.76rem;letter-spacing:0.08em;
-  color:rgba(255,255,255,0.85);
+  color:#fff;
   padding:0.3rem 0.7rem;
   border:1px solid rgba(255,255,255,0.18);
-  background:rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.2);
   border-radius:2px;
   transition:all 0.2s;
 }
@@ -1594,6 +1594,7 @@ body::before, body::after { display: none; }
   border-left:1px solid rgba(237,34,38,0.25);
   display:flex;
   flex-direction:column;
+  padding-bottom:4rem;
 }
 
 /* Photo zone — top 62%, pure visual, no text */
@@ -1640,7 +1641,8 @@ body::before, body::after { display: none; }
   gap:0;
   background:#111111;
   border-top:2px solid var(--bronze);
-  overflow:visible;
+  overflow-y:auto;
+  overflow-x:hidden;
   position:relative;
 }
 .hero-info-panel::-webkit-scrollbar{width:2px;}
@@ -1740,6 +1742,7 @@ body::before, body::after { display: none; }
     min-height:auto;
     border-left:none;
     border-top:1px solid var(--rule);
+    padding: 0 1.6rem 3rem;
   }
   .hero-photo-wrap{
     flex:none;
@@ -2438,7 +2441,7 @@ body::before, body::after { display: none; }
 
   /* ── SECTION TITLES ── */
   .section-title { font-size: 1.8rem; }
-  .section-divider { margin: 0; }
+  .section-divider { display: none; }
 
 
   /* ── HERO RING — scale down on mobile ── */
@@ -3057,7 +3060,7 @@ body::before, body::after { display: none; }
   gap:0;
   margin:1.5rem 0;
   border:1px solid rgba(255,255,255,0.08);
-  font-size:1.15rem;color:rgba(255,255,255,0.88);
+  font-size:1.15rem;color:#fff;
 }
 .vh-row{
   display:flex;align-items:center;
@@ -3101,7 +3104,7 @@ body::before, body::after { display: none; }
   margin:1.5rem auto 0;
   width:100%;max-width:260px;
   text-align:center;
-  font-size:1.15rem;color:rgba(255,255,255,0.88);
+  font-size:1.15rem;color:#fff !important;
 }
 .vmn-item{
   justify-content:center;
@@ -3109,7 +3112,7 @@ body::before, body::after { display: none; }
   width:100%;
 }
 .vmn-item{
-  font-size:0.72rem;color:var(--dim);
+  font-size:0.72rem;color:#fff !important;
   display:flex;align-items:center;gap:0.5rem;
   padding:0.4rem 0;
   border-bottom:1px solid rgba(212,136,42,0.06);
@@ -3780,8 +3783,8 @@ body::before, body::after { display: none; }
 }
 
 /* Visit hours */
-.vh-day{ color:rgba(255,255,255,0.55) !important; }
-.vh-time{ color:rgba(255,255,255,0.75) !important; }
+.vh-day{ color:#fff !important; }
+.vh-time{ color:#fff !important; }
 
 /* section experience left text */
 .exp-card-title{ color:#fff !important; }
@@ -4212,7 +4215,7 @@ body::before, body::after { display: none; }
   }
   .hero-trust { flex-wrap: wrap; gap: 0.45rem; padding-top: 1.2rem; margin-top: 1.2rem; }
   .trust-item { font-size: 0.6rem; padding: 0.22rem 0.5rem; }
-  .hero-right { order: 2; display: block; overflow: visible; min-height: auto; }
+  .hero-right { order: 2; display: block; overflow: visible; min-height: auto; padding-bottom: 4rem; }
 
   /* ── HERO INFO PANEL (right side) ── */
   .hero-info-panel {
