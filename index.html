@@ -332,103 +332,10 @@ body::before, body::after { display: none; }
   position:relative;overflow:hidden;
 }
 
-/* ══ CINEMATIC DISH SHOWCASE ══ */
-.dish-showcase{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:0;
-  overflow:hidden;
-}
 
-/* ── Orbiting spice ring ── */
-.spice-ring{
-  position:absolute;
-  width:260px;height:260px;
-  top:50%;left:50%;
-  transform:translate(-50%,-58%);
-  animation:ringRotate 18s linear infinite;
-}
-@keyframes ringRotate{to{transform:translate(-50%,-58%) rotate(360deg);}}
-.spice-dot{
-  position:absolute;
-  width:6px;height:6px;
-  border-radius:50%;
-  background:var(--bronze);
-  opacity:0.5;
-  top:50%;left:50%;
-  transform:
-    rotate(calc(var(--i) * 45deg))
-    translateX(120px)
-    translateY(-50%);
-  animation:spicePulse 2.4s calc(var(--i) * 0.3s) ease-in-out infinite;
-}
-.spice-dot:nth-child(odd){ background:var(--bronze2); width:4px;height:4px; }
-@keyframes spicePulse{
-  0%,100%{opacity:0.3;transform:rotate(calc(var(--i)*45deg)) translateX(120px) translateY(-50%) scale(1);}
-  50%{opacity:0.9;transform:rotate(calc(var(--i)*45deg)) translateX(120px) translateY(-50%) scale(1.8);}
-}
 
-/* ── Plate glow ── */
-.plate-glow{
-  position:absolute;
-  width:200px;height:200px;
-  top:50%;left:50%;
-  transform:translate(-50%,-60%);
-  border-radius:50%;
-  background:radial-gradient(ellipse at center,
-    rgba(212,136,42,0.35) 0%,
-    rgba(212,136,42,0.12) 40%,
-    transparent 70%);
-  animation:glowPulse 3s ease-in-out infinite;
-  pointer-events:none;
-}
-@keyframes glowPulse{
-  0%,100%{transform:translate(-50%,-60%) scale(1);   opacity:0.8;}
-  50%     {transform:translate(-50%,-60%) scale(1.15);opacity:1;}
-}
 
-/* ── Plate ── */
-.plate-wrap{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-62%);
-  width:150px;height:150px;
-}
-.plate{
-  width:150px;height:150px;
-  border-radius:50%;
-  background:
-    radial-gradient(ellipse at 35% 35%, rgba(255,255,255,0.06) 0%, transparent 55%),
-    radial-gradient(ellipse at center, #f5e8c8 0%, #f0dda8 60%, #e8cc88 100%);
-  border:2px solid rgba(212,136,42,0.30);
-  box-shadow:
-    0 0 0 8px rgba(212,136,42,0.06),
-    0 0 0 16px rgba(212,136,42,0.03),
-    0 20px 60px rgba(0,0,0,0.6),
-    inset 0 2px 4px rgba(255,255,255,0.05);
-  display:flex;align-items:center;justify-content:center;
-  transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
-}
-.plate:hover{transform:scale(1.06);}
-.dish-emoji{
-  font-size:4rem;
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));
-  transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-  display:block;
-  animation:plateEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
-}
-@keyframes plateEntrance{
-  0%  {transform:scale(0.3) rotate(-15deg);opacity:0;}
-  60% {transform:scale(1.15) rotate(5deg); opacity:1;}
-  100%{transform:scale(1)   rotate(0deg); opacity:1;}
-}
 
-/* ── Floating ingredient particles (JS injected) ── */
-.float-ingredients{
-  position:absolute;inset:0;
-  pointer-events:none;
-}
 .fi{
   position:absolute;
   font-size:1.2rem;
@@ -444,12 +351,7 @@ body::before, body::after { display: none; }
 }
 
 /* ── Dish info ── */
-.dish-info{
-  position:absolute;
-  bottom:58px;left:0;right:0;
-  text-align:center;
-  padding:0 1.5rem;
-}
+
 .dish-tag{
   display:inline-block;
   font-size:0.5rem;letter-spacing:0.35em;text-transform:uppercase;
@@ -457,24 +359,9 @@ body::before, body::after { display: none; }
   padding:0.18rem 0.7rem;margin-bottom:0.4rem;
   animation:infoIn 0.5s 0.15s ease both;
 }
-.dish-name{
-  font-family:var(--ff-d);font-style:italic;
-  font-size:1.5rem;font-weight:400;
-  color:var(--ivory);line-height:1.2;
-  margin-bottom:0.2rem;
-  animation:infoIn 0.5s 0.25s ease both;
-}
-.dish-desc{
-  font-size:0.62rem;letter-spacing:0.1em;
-  color:var(--dim);text-transform:uppercase;
-  margin-bottom:0.4rem;
-  animation:infoIn 0.5s 0.35s ease both;
-}
-.dish-price{
-  font-family:var(--ff-d);
-  font-size:1.1rem;color:var(--bronze2);
-  animation:infoIn 0.5s 0.4s ease both;
-}
+
+
+
 @keyframes infoIn{
   from{opacity:0;transform:translateY(10px);}
   to  {opacity:1;transform:translateY(0);}
@@ -2208,73 +2095,18 @@ body::before, body::after { display: none; }
   .hip-vert-divider{ display:none; }
   .hip-cuisine-pills{ flex-wrap:wrap; gap:0.4rem; }
 }
-.hero-plate-wrap{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;align-items:center;
-  gap:0;
-  margin-top:-60px; /* nudge plate to true visual center of stage */
-}
-.hero-plate{
-  width:200px;height:200px;
-  border-radius:50%;
-  background:
-    radial-gradient(ellipse at 35% 30%, rgba(255,255,255,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at center, #f5e8c8 0%, #f0dda8 55%, #e8cc88 100%);
-  border:1.5px solid rgba(212,136,42,0.25);
-  box-shadow:
-    0 0 0 10px rgba(212,136,42,0.04),
-    0 24px 64px rgba(0,0,0,0.7),
-    inset 0 2px 4px rgba(255,255,255,0.04);
-  display:flex;align-items:center;justify-content:center;
-  animation:plateFadeIn 0.8s cubic-bezier(0.22,1,0.36,1) both;
-  transition:transform 0.4s ease;
-}
-.hero-plate:hover{transform:scale(1.04);}
-@keyframes plateFadeIn{
-  from{opacity:0;transform:scale(0.85) translateY(20px);}
-  to  {opacity:1;transform:scale(1) translateY(0);}
-}
-.hero-dish-emoji{
-  font-size:5rem;
-  filter:drop-shadow(0 6px 16px rgba(0,0,0,0.6));
-  animation:plateEntrance 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
-}
-@keyframes plateEntrance{
-  from{transform:scale(0.4) rotate(-10deg);opacity:0;}
-  to  {transform:scale(1) rotate(0deg);opacity:1;}
-}
-.hero-dish-info{
-  text-align:center;
-  margin-top:1.8rem;
-  padding:0 2rem;
-  animation:infoFadeIn 0.6s ease 0.4s both;
-}
-@keyframes infoFadeIn{
-  from{opacity:0;transform:translateY(10px);}
-  to  {opacity:1;transform:translateY(0);}
-}
-.hero-dish-tag{
-  display:inline-block;
-  font-size:0.5rem;letter-spacing:0.35em;
-  text-transform:uppercase;color:var(--bronze);
-  border:1px solid rgba(212,136,42,0.3);
-  padding:0.2rem 0.75rem;
-  margin-bottom:0.5rem;
-}
-.hero-dish-name{
-  font-family:var(--ff-d);font-style:italic;
-  font-size:1.6rem;color:var(--ivory);
-  margin-bottom:0.3rem;
-}
-.hero-dish-desc{
-  font-size:0.62rem;letter-spacing:0.1em;
-  color:var(--dim);text-transform:uppercase;
-  margin-bottom:0.5rem;
-}
-.hero-dish-price{
-  font-family:var(--ff-d);
-  font-size:1.2rem;color:var(--bronze2);
-}
+
+
+
+
+
+
+
+
+
+
+
+
 /* Progress bar */
 .hero-progress{
   position:absolute;bottom:44px;left:2.5rem;right:2.5rem;
@@ -2897,33 +2729,18 @@ body::before, body::after { display: none; }
     justify-content: center;
     overflow: visible;
   }
-  .hero-dish-stage {
-    overflow: visible;
-  }
-  .hero-ring-container { width: 80px; height: 80px; }
-  .hero-plate { width: 80px; height: 80px; }
-  .hero-spice-ring-inner { width: 130px; height: 130px; }
-  .hero-outer-ring-inner { width: 112px; height: 112px; }
-  .hsr-dot {
-    transform:
-      rotate(calc(var(--i) * 30deg))
-      translateX(58px)
-      translateY(-50%);
-  }
-  .hero-plate-wrap { margin-top: 0; }
-  .hero-dish-emoji { font-size: 2rem; }
+
+
+
+
+
+
+
+
   /* Ensure ring doesn't overflow into dish info text */
   .hero-food-visual { min-height: 260px; }
-  .hero-dish-stage { overflow: hidden; }
-  .hero-dish-info {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    padding: 0 1rem;
-    margin-top: 1rem;
-    z-index: 3;
-  }
+
+
   .hero-progress {
     position: relative;
     bottom: auto;
@@ -2936,10 +2753,7 @@ body::before, body::after { display: none; }
     bottom: auto;
     margin-top: 0.5rem;
   }
-  .hero-plate-wrap {
-    flex-direction: column;
-    align-items: center;
-  }
+
 }
 
 
@@ -2987,115 +2801,16 @@ body::before, body::after { display: none; }
 .about-left::-webkit-scrollbar{width:3px;}
 .about-left::-webkit-scrollbar-thumb{background:var(--rule);}
 
-/* ── HERO SPICE RING ── */
-.hero-spice-ring{
-  position:absolute;
-  width:320px;height:320px;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  animation:hsrRotate 20s linear infinite;
-  pointer-events:none;
-  z-index:1;
-}
-@keyframes hsrRotate{
-  from{transform:translate(-50%,-50%) rotate(0deg);}
-  to  {transform:translate(-50%,-50%) rotate(360deg);}
-}
-.hsr-dot{
-  position:absolute;
-  top:50%;left:50%;
-  width:5px;height:5px;
-  border-radius:50%;
-  background:var(--bronze);
-  opacity:0.45;
-  transform:
-    rotate(calc(var(--i) * 30deg))
-    translateX(143px)
-    translateY(-50%);
-  animation:hsrPulse 3s calc(var(--i) * 0.25s) ease-in-out infinite;
-}
-.hsr-dot:nth-child(odd){
-  background:var(--bronze2);
-  width:3px;height:3px;
-  opacity:0.35;
-}
-.hsr-dot:nth-child(3n){
-  width:7px;height:7px;
-  opacity:0.55;
-  background:var(--bronze);
-  box-shadow:0 0 6px rgba(212,136,42,0.7);
-}
-@keyframes hsrPulse{
-  0%,100%{
-    opacity:0.25;
-    transform:rotate(calc(var(--i)*30deg)) translateX(148px) translateY(-50%) scale(1);
-  }
-  50%{
-    opacity:0.9;
-    transform:rotate(calc(var(--i)*30deg)) translateX(148px) translateY(-50%) scale(2);
-  }
-}
 
-/* ── Outer decorative orbit ring ── */
-.hero-outer-ring{
-  position:absolute;
-  width:290px;height:290px;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  border:1px solid rgba(212,136,42,0.12);
-  box-shadow:
-    0 0 0 18px rgba(212,136,42,0.04),
-    0 0 0 36px rgba(212,136,42,0.02);
-  pointer-events:none;
-  z-index:1;
-  animation:outerRingBreath 4s ease-in-out infinite;
-}
-@keyframes outerRingBreath{
-  0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1);}
-  50%     {opacity:1;  transform:translate(-50%,-50%) scale(1.04);}
-}
 
-/* ── RING CONTAINER — centered perfectly on the plate ── */
-.hero-ring-container{
-  position:relative;
-  width:200px;
-  height:200px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+
+
+
+
+
+
 /* Spice ring — sized relative to plate, absolutely centered */
-.hero-spice-ring-inner{
-  position:absolute;
-  width:310px;
-  height:310px;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  animation:hsrRotate 20s linear infinite;
-  pointer-events:none;
-  z-index:1;
-}
-/* Outer decorative ring */
-.hero-outer-ring-inner{
-  position:absolute;
-  width:270px;height:270px;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  border:1px solid rgba(212,136,42,0.15);
-  box-shadow:
-    0 0 0 14px rgba(212,136,42,0.04),
-    0 0 0 28px rgba(212,136,42,0.02);
-  pointer-events:none;
-  z-index:1;
-  animation:outerRingBreath 4s ease-in-out infinite;
-}
-/* Plate sits on top of rings */
-.hero-ring-container .hero-plate{
-  position:relative;
-  z-index:2;
-}
+
 
 /* ════════════════════════════════════════
    LUXURY DETAILS — v28
@@ -3276,20 +2991,7 @@ body::before, body::after { display: none; }
 }
 
 /* ── Hero plate luxury shadow ── */
-.hero-plate {
-  box-shadow:
-    0 0 0 10px rgba(212,136,42,0.04),
-    0 24px 64px rgba(0,0,0,0.7),
-    0 0 40px rgba(212,136,42,0.08),
-    inset 0 2px 4px rgba(255,255,255,0.04);
-}
-.hero-plate:hover {
-  box-shadow:
-    0 0 0 10px rgba(212,136,42,0.06),
-    0 24px 64px rgba(0,0,0,0.7),
-    0 0 60px rgba(212,136,42,0.18),
-    inset 0 2px 4px rgba(255,255,255,0.04);
-}
+
 
 /* ── Logo hover glow ── */
 .topbar-logo:hover .topbar-logo-img {
@@ -3613,21 +3315,12 @@ body::before, body::after { display: none; }
 }
 
 @media(max-width:768px){
-  /* Make hero-dish-stage a flex column so we can reorder children */
-  .hero-dish-stage{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:0.5rem;
-    overflow:visible !important;
-  }
-  /* Order: plate-wrap first, then dish info, then progress, then dots */
-  .hero-plate-wrap  { order:1; }
-  .hero-dish-info   { order:2; position:static !important; }
+
+
+
   .hero-progress    { order:3; position:static !important; width:80%; margin:0.4rem auto 0; }
   .hero-dots        { order:4; position:static !important; margin-top:0.3rem; }
-  .hero-dish-bg     { display:none; }
+
 }
 
 @media(max-width:768px){
@@ -3649,21 +3342,11 @@ body::before, body::after { display: none; }
   }
 
   /* ── 2. HERO RIGHT — bottom breathing room ── */
-  .hero-plate-wrap{
-    padding-bottom:1.2rem;
-  }
-  .hero-dish-info{
-    padding:0 0.8rem;
-  }
-  .hero-dish-name{
-    font-size:1.2rem;
-  }
-  .hero-dish-desc{
-    font-size:0.58rem;
-  }
-  .hero-dish-price{
-    font-size:0.95rem;
-  }
+
+
+
+
+
 
   /* ── 3. EXP CARDS — reduce padding ── */
   .exp-card{ padding:1.4rem 1.2rem; }
@@ -3898,17 +3581,12 @@ body::before, body::after { display: none; }
   .footer-contact-list li{ font-size: 0.84rem; }
 
   /* ── 8. HERO RING — slightly smaller on tablet ── */
-  .hero-ring-container{ width: 170px; height: 170px; }
-  .hero-plate{ width: 170px; height: 170px; }
-  .hero-spice-ring-inner{ width: 260px; height: 260px; }
+
+
+
   .hero-outer-ring-inner{ width: 228px; height: 228px; }
-  .hsr-dot{
-    transform:
-      rotate(calc(var(--i) * 30deg))
-      translateX(117px)
-      translateY(-50%);
-  }
-  .hero-dish-emoji{ font-size: 4rem; }
+
+
 
   /* ── 9. TOPBAR ── */
   .topbar-left{
@@ -4145,12 +3823,6 @@ body::before, body::after { display: none; }
     radial-gradient(ellipse at center, #2a1a1a 0%, #1a1010 60%, #120c0c 100%) !important;
   border-color:rgba(237,34,38,0.25) !important;
 }
-.hero-plate{
-  background:
-    radial-gradient(ellipse at 35% 30%, rgba(255,255,255,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at center, #2a1a1a 0%, #1a1010 55%, #120c0c 100%) !important;
-  border-color:rgba(237,34,38,0.2) !important;
-}
 
 /* Hero section full dark with subtle red glow */
 .hero{
@@ -4161,7 +3833,6 @@ body::before, body::after { display: none; }
 }
 
 /* Make all dot/spice ring elements red-tinted */
-.spice-dot, .hsr-dot{ background:var(--bronze) !important; }
 
 /* Map visit section */
 .visit-map::before{
@@ -5837,8 +5508,6 @@ body::before, body::after { display: none; }
     <div style="border-top:1px solid rgba(255,255,255,0.06);padding:1rem 4rem;">
       <div class="footer-bottom">
         <span>© 2008 – 2025 De Varsity Club · Salem, Tamil Nadu · All rights reserved</span>
-        <span style="color:rgba(255,255,255,0.15);">|</span>
-        <span>Designed with ❤ for Salem's finest</span>
       </div>
     </div>
   </footer>
@@ -5875,210 +5544,9 @@ body::before, body::after { display: none; }
   </div>
 </div>
 
-<script>
-/* ══ CINEMATIC DISH SHOWCASE ══ */
-(function(){
-  const dishes = [
-    {
-      emoji:'🍛', name:'Dindigul Biriyani',
-      desc:'Seeraga samba · Salem pepper dum', price:'₹380',
-      tag:'Signature', ingredients:['🌶️','🧅','🫙','🌿','⭐'],
-      glow:'rgba(212,136,42,0.4)'
-    },
-    {
-      emoji:'🦀', name:'Nandu Rasam',
-      desc:'Slow-simmered crab · kalpasi broth', price:'₹280',
-      tag:'Spicy', ingredients:['🌶️','🧄','🫚','🌊','🫧'],
-      glow:'rgba(180,80,40,0.4)'
-    },
-    {
-      emoji:'🍗', name:'Kozhi Varuval',
-      desc:'Country chicken · stone-ground masala', price:'₹320',
-      tag:'Dry Fry', ingredients:['🌿','🧄','🫙','🌶️','🔥'],
-      glow:'rgba(200,120,30,0.4)'
-    },
-    {
-      emoji:'🐟', name:'Meen Kulambu',
-      desc:'Tamarind · raw mango · coastal spice', price:'₹340',
-      tag:'Spicy', ingredients:['🍋','🌶️','🫙','🌿','🧅'],
-      glow:'rgba(160,100,40,0.35)'
-    },
-    {
-      emoji:'🍖', name:'Mutton Sukka',
-      desc:'Wood-fire roasted · fresh masala', price:'₹420',
-      tag:'Bold', ingredients:['🔥','🌶️','🫙','🧅','⭐'],
-      glow:'rgba(190,90,30,0.4)'
-    },
-    {
-      emoji:'🫘', name:'Kavuni Arisi Halwa',
-      desc:'Black rice · jaggery · coconut milk', price:'₹120',
-      tag:'Sweet', ingredients:['🥥','🍯','🌸','✨','💛'],
-      glow:'rgba(140,90,180,0.3)'
-    },
-  ];
-
-  const emojiEl  = document.getElementById('dishEmoji');
-  const nameEl   = document.getElementById('dishName');
-  const descEl   = document.getElementById('dishDesc');
-  const priceEl  = document.getElementById('dishPrice');
-  const tagEl    = document.getElementById('dishTag');
-  const barEl    = document.getElementById('dishBar');
-  const dotsEl   = document.getElementById('dishDots');
-  const intrEl   = document.getElementById('floatIngr');
-  const glowEl   = document.querySelector('.plate-glow');
-  if(!emojiEl) return;
-
-  const INTERVAL = 4000;
-  let current = 0, timer = null, barTimer = null, paused = false;
-
-  /* Build dots */
-  dishes.forEach((_,i) => {
-    const d = document.createElement('button');
-    d.className = 'ddot' + (i===0?' active':'');
-    d.setAttribute('aria-label','Dish '+(i+1));
-    d.addEventListener('click', () => { goTo(i); resetBar(); });
-    dotsEl.appendChild(d);
-  });
-
-  function goTo(idx){
-    current = idx;
-    const d = dishes[idx];
-
-    /* Plate exit → enter */
-    emojiEl.style.animation = 'none';
-    void emojiEl.offsetWidth;
-    emojiEl.textContent  = d.emoji;
-    emojiEl.style.animation = 'plateEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both';
-
-    /* Info */
-    [nameEl,descEl,priceEl,tagEl].forEach(el=>{
-      el.style.animation='none'; void el.offsetWidth;
-    });
-    nameEl.textContent  = d.name;
-    descEl.textContent  = d.desc;
-    priceEl.textContent = d.price;
-    tagEl.textContent   = d.tag;
-    [nameEl,descEl,priceEl,tagEl].forEach(el=> el.style.animation='');
-
-    /* Glow colour */
-    glowEl.style.background = `radial-gradient(ellipse at center, ${d.glow} 0%, transparent 70%)`;
-
-    /* Floating ingredients */
-    intrEl.innerHTML = '';
-    d.ingredients.forEach((ing, i) => {
-      const span = document.createElement('span');
-      span.className = 'fi';
-      const leftPct = 20 + Math.random() * 60;
-      const drift   = (Math.random()-0.5)*60+'px';
-      const dur     = 2.2 + Math.random()*1.4;
-      const delay   = i * 0.18;
-      span.textContent = ing;
-      span.style.cssText = `left:${leftPct}%;--dur:${dur}s;--delay:${delay}s;--drift:${drift};`;
-      intrEl.appendChild(span);
-    });
-
-    /* Dots */
-    dotsEl.querySelectorAll('.ddot').forEach((d,j)=>
-      d.classList.toggle('active', j===idx));
-  }
-
-  /* Progress bar */
-  function resetBar(){
-    clearInterval(barTimer);
-    barEl.style.transition = 'none';
-    barEl.style.width = '0%';
-    void barEl.offsetWidth;
-    barEl.style.transition = `width ${INTERVAL}ms linear`;
-    barEl.style.width = '100%';
-    barTimer = setInterval(()=>{
-      if(!paused){
-        current = (current+1) % dishes.length;
-        goTo(current);
-      }
-    }, INTERVAL);
-  }
-
-  /* Pause on hover */
-  const showcase = document.getElementById('dishShowcase');
-  if(showcase){
-    showcase.addEventListener('mouseenter', ()=>{ paused=true; barEl.style.animationPlayState='paused'; });
-    showcase.addEventListener('mouseleave', ()=>{ paused=false; });
-  }
-
-  /* Pause when panel hidden */
-  const homePanel = document.getElementById('p-home');
-  if(homePanel){
-    new MutationObserver(()=>{
-      if(homePanel.classList.contains('active')){ paused=false; }
-      else{ paused=true; }
-    }).observe(homePanel,{attributes:true,attributeFilter:['class']});
-  }
-
-  goTo(0);
-  resetBar();
 })();
 </script>
 
-
-<script>
-/* ══ HERO DISH SHOWCASE ══ */
-(function(){
-  const dishes = [
-    { emoji:'🍛', name:'Dindigul Biriyani',    desc:'Seeraga samba · Salem pepper dum',   price:'₹380', tag:'Signature' },
-    { emoji:'🦀', name:'Nandu Rasam',          desc:'Slow-simmered crab · kalpasi broth', price:'₹280', tag:'Spicy'     },
-    { emoji:'🍗', name:'Kozhi Varuval',        desc:'Country chicken · stone-ground masala',price:'₹320',tag:'Dry Fry'  },
-    { emoji:'🐟', name:'Meen Kulambu',         desc:'Tamarind · raw mango · coastal spice',price:'₹340',tag:'Spicy'    },
-    { emoji:'🍖', name:'Mutton Sukka',         desc:'Wood-fire roasted · fresh masala',   price:'₹420', tag:'Bold'      },
-    { emoji:'🫘', name:'Kavuni Arisi Halwa',   desc:'Black rice · jaggery · coconut milk',price:'₹120', tag:'Sweet'    },
-  ];
-  const emojiEl = document.getElementById('heroDishEmoji');
-  const nameEl  = document.getElementById('heroDishName');
-  const descEl  = document.getElementById('heroDishDesc');
-  const priceEl = document.getElementById('heroDishPrice');
-  const tagEl   = document.getElementById('heroDishTag');
-  const barEl   = document.getElementById('heroBar');
-  const dotsEl  = document.getElementById('heroDots');
-  if(!emojiEl) return;
-
-  const INTERVAL = 4000;
-  let current = 0, barTimer = null;
-
-  dishes.forEach((_,i) => {
-    const d = document.createElement('button');
-    d.className = 'hdot' + (i===0?' active':'');
-    d.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(d);
-  });
-
-  function goTo(i){
-    current = i;
-    const d = dishes[i];
-    emojiEl.style.animation = 'none';
-    void emojiEl.offsetWidth;
-    emojiEl.style.animation = '';
-    emojiEl.textContent  = d.emoji;
-    nameEl.textContent   = d.name;
-    descEl.textContent   = d.desc;
-    priceEl.textContent  = d.price;
-    tagEl.textContent    = d.tag;
-    dotsEl.querySelectorAll('.hdot').forEach((dot,j) => dot.classList.toggle('active', j===i));
-    resetBar();
-  }
-
-  function resetBar(){
-    clearInterval(barTimer);
-    barEl.style.width = '0%';
-    let w = 0;
-    barTimer = setInterval(() => {
-      w += 100/(INTERVAL/100);
-      barEl.style.width = Math.min(w,100) + '%';
-      if(w >= 100){ clearInterval(barTimer); current = (current+1) % dishes.length; goTo(current); }
-    }, 100);
-  }
-
-  resetBar();
-})();
-</script>
 
 <script>
 function switchPanel(id) {
@@ -6588,654 +6056,6 @@ cartRender(); // init
     });
   });
 })();
-
-// Build WhatsApp message and open
-function bwBook(type){
-  let msg = '';
-  const wa = '919842172020';
-
-  if(type === 'dine'){
-    const date   = document.getElementById('dineDate')?.value   || 'Not specified';
-    const time   = document.getElementById('dineTime')?.value   || 'Not specified';
-    const guests = document.getElementById('dineGuests')?.value || 'Not specified';
-    msg = `🍽️ *Dine-In Reservation — De Varsity Club*
-━━━━━━━━━━━━━━━━━━━━
-📅 Date: ${date}
-🕐 Time: ${time}
-👥 Guests: ${guests}
-━━━━━━━━━━━━━━━━━━━━
-Sent from varsitykitchen.in`;
-  }
-  else if(type === 'stay'){
-    const cin    = document.getElementById('stayIn')?.value    || '—';
-    const cout   = document.getElementById('stayOut')?.value   || '—';
-    const guests = document.getElementById('stayGuests')?.value || '—';
-    msg = `🏨 *Stay Enquiry — De Varsity Club*
-━━━━━━━━━━━━━━━━━━━━
-📅 Check-In: ${cin}
-📅 Check-Out: ${cout}
-👥 Guests: ${guests}
-━━━━━━━━━━━━━━━━━━━━
-Sent from varsitykitchen.in`;
-  }
-  else if(type === 'events'){
-    const evType = document.querySelector('.bw-et-card.active')?.dataset.event || 'Not selected';
-    const evLabel = document.querySelector('.bw-et-card.active .bw-et-lbl')?.textContent?.trim() || evType;
-    const date   = document.getElementById('evDate')?.value    || '—';
-    const guests = document.getElementById('evGuests')?.value  || '—';
-    const venue  = document.getElementById('evVenue')?.value   || '—';
-    msg = `🎉 *Event Enquiry — De Varsity Club*
-━━━━━━━━━━━━━━━━━━━━
-✨ Event Type: ${evLabel}
-📅 Date: ${date}
-👥 Expected Guests: ${guests}
-🏛️ Venue Preference: ${venue}
-━━━━━━━━━━━━━━━━━━━━
-Sent from varsitykitchen.in`;
-  }
-
-  if(msg){
-    window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(msg), '_blank');
-  }
-}
-</script>
-</body>
-</html>
-  </div>
-
-
-  </div>
- hint arrow -->
-
-
-<!-- Floating WhatsApp + Cart -->
-<a href="https://wa.me/919876543210?text=Hi%20Varsity%20Kitchen!" class="float-wa" id="floatWa" target="_blank" title="WhatsApp / View Order">💬
-  <span class="cart-badge" id="cartBadge">0</span>
-</a>
-
-<!-- Cart Tray -->
-<div class="cart-tray" id="cartTray">
-  <div class="cart-head">
-    <span class="cart-title">🛒 Your Order</span>
-    <button class="cart-close" id="cartClose">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty">No items yet — add from the menu!</div>
-  </div>
-  <div class="cart-footer" id="cartFooter" style="display:none;">
-    <div class="cart-total">
-      <span>Total</span>
-      <span class="cart-total-val" id="cartTotal">₹0</span>
-    </div>
-    <button class="cart-wa-btn" id="cartWaBtn">
-      <span>💬</span> Send Order on WhatsApp
-    </button>
-  </div>
-</div>
-
-<script>
-/* ══ CINEMATIC DISH SHOWCASE ══ */
-(function(){
-  const dishes = [
-    {
-      emoji:'🍛', name:'Dindigul Biriyani',
-      desc:'Seeraga samba · Salem pepper dum', price:'₹380',
-      tag:'Signature', ingredients:['🌶️','🧅','🫙','🌿','⭐'],
-      glow:'rgba(212,136,42,0.4)'
-    },
-    {
-      emoji:'🦀', name:'Nandu Rasam',
-      desc:'Slow-simmered crab · kalpasi broth', price:'₹280',
-      tag:'Spicy', ingredients:['🌶️','🧄','🫚','🌊','🫧'],
-      glow:'rgba(180,80,40,0.4)'
-    },
-    {
-      emoji:'🍗', name:'Kozhi Varuval',
-      desc:'Country chicken · stone-ground masala', price:'₹320',
-      tag:'Dry Fry', ingredients:['🌿','🧄','🫙','🌶️','🔥'],
-      glow:'rgba(200,120,30,0.4)'
-    },
-    {
-      emoji:'🐟', name:'Meen Kulambu',
-      desc:'Tamarind · raw mango · coastal spice', price:'₹340',
-      tag:'Spicy', ingredients:['🍋','🌶️','🫙','🌿','🧅'],
-      glow:'rgba(160,100,40,0.35)'
-    },
-    {
-      emoji:'🍖', name:'Mutton Sukka',
-      desc:'Wood-fire roasted · fresh masala', price:'₹420',
-      tag:'Bold', ingredients:['🔥','🌶️','🫙','🧅','⭐'],
-      glow:'rgba(190,90,30,0.4)'
-    },
-    {
-      emoji:'🫘', name:'Kavuni Arisi Halwa',
-      desc:'Black rice · jaggery · coconut milk', price:'₹120',
-      tag:'Sweet', ingredients:['🥥','🍯','🌸','✨','💛'],
-      glow:'rgba(140,90,180,0.3)'
-    },
-  ];
-
-  const emojiEl  = document.getElementById('dishEmoji');
-  const nameEl   = document.getElementById('dishName');
-  const descEl   = document.getElementById('dishDesc');
-  const priceEl  = document.getElementById('dishPrice');
-  const tagEl    = document.getElementById('dishTag');
-  const barEl    = document.getElementById('dishBar');
-  const dotsEl   = document.getElementById('dishDots');
-  const intrEl   = document.getElementById('floatIngr');
-  const glowEl   = document.querySelector('.plate-glow');
-  if(!emojiEl) return;
-
-  const INTERVAL = 4000;
-  let current = 0, timer = null, barTimer = null, paused = false;
-
-  /* Build dots */
-  dishes.forEach((_,i) => {
-    const d = document.createElement('button');
-    d.className = 'ddot' + (i===0?' active':'');
-    d.setAttribute('aria-label','Dish '+(i+1));
-    d.addEventListener('click', () => { goTo(i); resetBar(); });
-    dotsEl.appendChild(d);
-  });
-
-  function goTo(idx){
-    current = idx;
-    const d = dishes[idx];
-
-    /* Plate exit → enter */
-    emojiEl.style.animation = 'none';
-    void emojiEl.offsetWidth;
-    emojiEl.textContent  = d.emoji;
-    emojiEl.style.animation = 'plateEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both';
-
-    /* Info */
-    [nameEl,descEl,priceEl,tagEl].forEach(el=>{
-      el.style.animation='none'; void el.offsetWidth;
-    });
-    nameEl.textContent  = d.name;
-    descEl.textContent  = d.desc;
-    priceEl.textContent = d.price;
-    tagEl.textContent   = d.tag;
-    [nameEl,descEl,priceEl,tagEl].forEach(el=> el.style.animation='');
-
-    /* Glow colour */
-    glowEl.style.background = `radial-gradient(ellipse at center, ${d.glow} 0%, transparent 70%)`;
-
-    /* Floating ingredients */
-    intrEl.innerHTML = '';
-    d.ingredients.forEach((ing, i) => {
-      const span = document.createElement('span');
-      span.className = 'fi';
-      const leftPct = 20 + Math.random() * 60;
-      const drift   = (Math.random()-0.5)*60+'px';
-      const dur     = 2.2 + Math.random()*1.4;
-      const delay   = i * 0.18;
-      span.textContent = ing;
-      span.style.cssText = `left:${leftPct}%;--dur:${dur}s;--delay:${delay}s;--drift:${drift};`;
-      intrEl.appendChild(span);
-    });
-
-    /* Dots */
-    dotsEl.querySelectorAll('.ddot').forEach((d,j)=>
-      d.classList.toggle('active', j===idx));
-  }
-
-  /* Progress bar */
-  function resetBar(){
-    clearInterval(barTimer);
-    barEl.style.transition = 'none';
-    barEl.style.width = '0%';
-    void barEl.offsetWidth;
-    barEl.style.transition = `width ${INTERVAL}ms linear`;
-    barEl.style.width = '100%';
-    barTimer = setInterval(()=>{
-      if(!paused){
-        current = (current+1) % dishes.length;
-        goTo(current);
-      }
-    }, INTERVAL);
-  }
-
-  /* Pause on hover */
-  const showcase = document.getElementById('dishShowcase');
-  if(showcase){
-    showcase.addEventListener('mouseenter', ()=>{ paused=true; barEl.style.animationPlayState='paused'; });
-    showcase.addEventListener('mouseleave', ()=>{ paused=false; });
-  }
-
-  /* Pause when panel hidden */
-  const homePanel = document.getElementById('p-home');
-  if(homePanel){
-    new MutationObserver(()=>{
-      if(homePanel.classList.contains('active')){ paused=false; }
-      else{ paused=true; }
-    }).observe(homePanel,{attributes:true,attributeFilter:['class']});
-  }
-
-  goTo(0);
-  resetBar();
-})();
-</script>
-
-
-<script>
-/* ══ HERO DISH SHOWCASE ══ */
-(function(){
-  const dishes = [
-    { emoji:'🍛', name:'Dindigul Biriyani',    desc:'Seeraga samba · Salem pepper dum',   price:'₹380', tag:'Signature' },
-    { emoji:'🦀', name:'Nandu Rasam',          desc:'Slow-simmered crab · kalpasi broth', price:'₹280', tag:'Spicy'     },
-    { emoji:'🍗', name:'Kozhi Varuval',        desc:'Country chicken · stone-ground masala',price:'₹320',tag:'Dry Fry'  },
-    { emoji:'🐟', name:'Meen Kulambu',         desc:'Tamarind · raw mango · coastal spice',price:'₹340',tag:'Spicy'    },
-    { emoji:'🍖', name:'Mutton Sukka',         desc:'Wood-fire roasted · fresh masala',   price:'₹420', tag:'Bold'      },
-    { emoji:'🫘', name:'Kavuni Arisi Halwa',   desc:'Black rice · jaggery · coconut milk',price:'₹120', tag:'Sweet'    },
-  ];
-  const emojiEl = document.getElementById('heroDishEmoji');
-  const nameEl  = document.getElementById('heroDishName');
-  const descEl  = document.getElementById('heroDishDesc');
-  const priceEl = document.getElementById('heroDishPrice');
-  const tagEl   = document.getElementById('heroDishTag');
-  const barEl   = document.getElementById('heroBar');
-  const dotsEl  = document.getElementById('heroDots');
-  if(!emojiEl) return;
-
-  const INTERVAL = 4000;
-  let current = 0, barTimer = null;
-
-  dishes.forEach((_,i) => {
-    const d = document.createElement('button');
-    d.className = 'hdot' + (i===0?' active':'');
-    d.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(d);
-  });
-
-  function goTo(i){
-    current = i;
-    const d = dishes[i];
-    emojiEl.style.animation = 'none';
-    void emojiEl.offsetWidth;
-    emojiEl.style.animation = '';
-    emojiEl.textContent  = d.emoji;
-    nameEl.textContent   = d.name;
-    descEl.textContent   = d.desc;
-    priceEl.textContent  = d.price;
-    tagEl.textContent    = d.tag;
-    dotsEl.querySelectorAll('.hdot').forEach((dot,j) => dot.classList.toggle('active', j===i));
-    resetBar();
-  }
-
-  function resetBar(){
-    clearInterval(barTimer);
-    barEl.style.width = '0%';
-    let w = 0;
-    barTimer = setInterval(() => {
-      w += 100/(INTERVAL/100);
-      barEl.style.width = Math.min(w,100) + '%';
-      if(w >= 100){ clearInterval(barTimer); current = (current+1) % dishes.length; goTo(current); }
-    }, 100);
-  }
-
-  resetBar();
-})();
-</script>
-
-<script>
-function switchPanel(id) {
-  document.querySelectorAll('.panel').forEach(p => {
-    p.classList.remove('active');
-  });
-  document.querySelectorAll('.bnav-item').forEach(b => {
-    b.classList.remove('active');
-  });
-  const panel = document.getElementById('p-' + id);
-  if (panel) panel.classList.add('active');
-  const btn = document.querySelector(`.bnav-item[data-panel="${id}"]`);
-  if (btn) btn.classList.add('active');
-  // Prevent URL hash from scrolling the page
-  history.replaceState(null, '', '#p-' + id);
-}
-
-document.querySelectorAll('.bnav-item').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    switchPanel(btn.dataset.panel);
-  });
-});
-
-});
-
-// Handle topbar reserve and inline CTA links
-document.querySelectorAll('a[href^="#p-"]').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const id = link.getAttribute('href').replace('#p-', '');
-    if (document.getElementById('p-' + id)) {
-      e.preventDefault();
-      switchPanel(id);
-    }
-  });
-});
-
-// On page load, check hash and switch to correct panel
-(function(){
-  const hash = window.location.hash;
-  if(hash && hash.startsWith('#p-')){
-    const id = hash.replace('#p-','');
-    if(document.getElementById('p-' + id)) switchPanel(id);
-  }
-})();
-
-</script>
-
-<script>
-/* ── MOBILE NAV SWIPE HINT ── */
-(function(){
-  const nav   = document.querySelector('.bottomnav');
-  const hint  = document.getElementById('navSwipeHint');
-  if(!nav || !hint) return;
-
-  function updateHint(){
-    const atEnd  = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 4;
-    const atStart= nav.scrollLeft <= 4;
-
-    if(atEnd){
-      // Scrolled all the way right — show left arrow
-      hint.querySelector('span').innerHTML = '&#8249;';
-      hint.style.left  = '0';
-      hint.style.right = 'auto';
-      // Update fade to left side
-      nav.style.setProperty('--fade-side','right');
-    } else {
-      // More tabs to the right — show right arrow
-      hint.querySelector('span').innerHTML = '&#8250;';
-      hint.style.right = '0';
-      hint.style.left  = 'auto';
-    }
-    // Always show hint if there's overflow
-    hint.style.display = (nav.scrollWidth > nav.clientWidth) ? 'flex' : 'none';
-  }
-
-  // Tap the hint arrow to scroll the nav
-  hint.addEventListener('click', function(){
-    const atEnd = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 4;
-    nav.scrollBy({ left: atEnd ? -120 : 120, behavior:'smooth' });
-  });
-
-  nav.addEventListener('scroll', updateHint, {passive:true});
-  window.addEventListener('resize', updateHint);
-  // Init after layout
-  setTimeout(updateHint, 100);
-})();
-</script>
-
-<script>
-/* ══════════════════════════════════════════════
-   WHATSAPP DEEP INTEGRATION
-   1. Menu cart — add items, send full order
-   2. Reserve form — build rich booking message
-   3. Floating button — toggles cart tray
-   4. Facility enquiry — pre-filled per facility
-══════════════════════════════════════════════ */
-const WA_NUMBER = '919876543210';
-const waOpen = (msg) => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
-
-/* ── 1. CART SYSTEM ── */
-let cart = [];
-
-function cartRender(){
-  const itemsEl  = document.getElementById('cartItems');
-  const badgeEl  = document.getElementById('cartBadge');
-  const totalEl  = document.getElementById('cartTotal');
-  const footerEl = document.getElementById('cartFooter');
-  if(!itemsEl) return;
-
-  if(cart.length === 0){
-    itemsEl.innerHTML  = '<div class="cart-empty">No items yet — add from the menu!</div>';
-    footerEl.style.display = 'none';
-    badgeEl.classList.remove('visible');
-    return;
-  }
-
-  // Group duplicates
-  const grouped = cart.reduce((acc, item) => {
-    const existing = acc.find(a => a.name === item.name);
-    if(existing){ existing.qty++; existing.total += item.price; }
-    else { acc.push({...item, qty:1, total:item.price}); }
-    return acc;
-  }, []);
-
-  itemsEl.innerHTML = grouped.map((item, i) => `
-    <div class="cart-item">
-      <span class="cart-item-name">${item.emoji} ${item.name} ${item.qty>1?'×'+item.qty:''}</span>
-      <span class="cart-item-price">₹${item.total}</span>
-      <button class="cart-item-rm" data-name="${item.name}" title="Remove">✕</button>
-    </div>
-  `).join('');
-
-  // Remove buttons
-  itemsEl.querySelectorAll('.cart-item-rm').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const idx = cart.findIndex(c => c.name === btn.dataset.name);
-      if(idx !== -1) cart.splice(idx, 1);
-      cartRender();
-    });
-  });
-
-  const total = cart.reduce((s, i) => s + i.price, 0);
-  totalEl.textContent   = '₹' + total;
-  footerEl.style.display = 'block';
-  badgeEl.textContent   = cart.length;
-  badgeEl.classList.add('visible');
-}
-
-function addToCart(name, price, emoji){
-  cart.push({name, price, emoji});
-  cartRender();
-  // Open tray briefly to show feedback
-  const tray = document.getElementById('cartTray');
-  if(tray){ tray.classList.add('open'); }
-  // Animate badge
-  const badge = document.getElementById('cartBadge');
-  if(badge){
-    badge.style.transform = 'scale(1.6)';
-    setTimeout(()=>{ badge.style.transform = ''; }, 300);
-  }
-}
-
-// Send cart via WhatsApp
-document.getElementById('cartWaBtn')?.addEventListener('click', () => {
-  if(cart.length === 0) return;
-  const grouped = cart.reduce((acc, item) => {
-    const e = acc.find(a => a.name === item.name);
-    if(e){ e.qty++; e.total += item.price; }
-    else { acc.push({...item, qty:1, total:item.price}); }
-    return acc;
-  }, []);
-  const lines = grouped.map(i => `  • ${i.emoji} ${i.name}${i.qty>1?' ×'+i.qty:''} — ₹${i.total}`).join('\n');
-  const total = cart.reduce((s,i) => s+i.price, 0);
-  const msg =
-`🍽️ *Order from Varsity Kitchen Website*
-━━━━━━━━━━━━━━━━━━━━
-${lines}
-━━━━━━━━━━━━━━━━━━━━
-*Total: ₹${total}*
-
-📍 Table / Delivery preference: [please specify]
-⏰ Preferred time: [please specify]
-
-Sent from varsitykitchen.in`;
-  waOpen(msg);
-});
-
-// Close cart tray
-document.getElementById('cartClose')?.addEventListener('click', () => {
-  document.getElementById('cartTray')?.classList.remove('open');
-});
-
-// Floating WA button — if cart has items open tray, else open WA
-document.getElementById('floatWa')?.addEventListener('click', (e) => {
-  if(cart.length > 0){
-    e.preventDefault();
-    document.getElementById('cartTray')?.classList.toggle('open');
-  }
-});
-
-/* ── 2. MENU CARDS — inject "Add to Order" button via JS renderer ── */
-// Patch menu card renderer to include WA add button
-const _origMenuData = window.menuData || null;
-function injectWaButtons(){
-  document.querySelectorAll('.m-card').forEach(card => {
-    if(card.querySelector('.m-order-btn')) return; // already added
-    const name  = card.querySelector('.m-name')?.textContent?.trim();
-    const price = parseInt(card.querySelector('.m-price')?.textContent?.replace('₹','') || '0');
-    const emoji = card.querySelector('.m-emoji')?.textContent?.trim() || '🍽️';
-    if(!name) return;
-    const btn = document.createElement('button');
-    btn.className = 'm-order-btn';
-    btn.innerHTML = '<span class="wa-icon">＋</span> Add to Order';
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      addToCart(name, price, emoji);
-      btn.innerHTML = '<span class="wa-icon">✓</span> Added!';
-      btn.style.background = 'rgba(37,211,102,0.22)';
-      setTimeout(()=>{
-        btn.innerHTML = '<span class="wa-icon">＋</span> Add to Order';
-        btn.style.background = '';
-      }, 1500);
-    });
-    const bottom = card.querySelector('.m-bottom');
-    if(bottom) bottom.appendChild(btn);
-  });
-}
-
-// Run on load and whenever menu tabs switch
-injectWaButtons();
-document.querySelectorAll('.mtab').forEach(tab => {
-  tab.addEventListener('click', () => setTimeout(injectWaButtons, 50));
-});
-
-/* ── 3. RESERVE FORM — build rich WhatsApp message ── */
-document.getElementById('reserveWaBtn')?.addEventListener('click', () => {
-  const name     = document.getElementById('rName')?.value?.trim()    || '—';
-  const phone    = document.getElementById('rPhone')?.value?.trim()   || '—';
-  const date     = document.getElementById('rDate')?.value            || '—';
-  const time     = document.getElementById('rTime')?.value            || '—';
-  const guests   = document.getElementById('rGuests')?.value          || '—';
-  const occasion = document.getElementById('rOccasion')?.value        || '—';
-  const notes    = document.getElementById('rNotes')?.value?.trim()   || 'None';
-
-  if(name === '—' || date === '—' || time === '—'){
-    alert('Please fill in your name, date and time before continuing.');
-    return;
-  }
-
-  // Format date nicely
-  const dateFormatted = date !== '—'
-    ? new Date(date).toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})
-    : '—';
-
-  const msg =
-`🗓️ *Table Reservation — Varsity Kitchen*
-━━━━━━━━━━━━━━━━━━━━
-👤 Name: ${name}
-📱 Phone: ${phone}
-📅 Date: ${dateFormatted}
-🕐 Time: ${time}
-👥 Guests: ${guests}
-🎉 Occasion: ${occasion}
-📝 Requests: ${notes}
-━━━━━━━━━━━━━━━━━━━━
-Booked via varsitykitchen.in`;
-
-  waOpen(msg);
-});
-
-/* ── 4. CLOSE CART when clicking outside ── */
-document.addEventListener('click', (e) => {
-  const tray = document.getElementById('cartTray');
-  const wa   = document.getElementById('floatWa');
-  if(tray && !tray.contains(e.target) && !wa?.contains(e.target)){
-    tray.classList.remove('open');
-  }
-});
-
-cartRender(); // init
-</script>
-
-<script>
-/* ── DYNAMIC OPENING HOURS ── */
-(function(){
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const hours = {
-    0: { label:'Sunday',          time:'11:00 AM – 11:00 PM',  open:true  },
-    1: { label:'Monday',          time:'11:30 AM – 10:30 PM',  open:true  },
-    2: { label:'Tuesday',         time:'11:30 AM – 10:30 PM',  open:true  },
-    3: { label:'Wednesday',       time:'11:30 AM – 10:30 PM',  open:true  },
-    4: { label:'Thursday',        time:'11:30 AM – 10:30 PM',  open:true  },
-    5: { label:'Friday',          time:'11:30 AM – 10:30 PM',  open:true  },
-    6: { label:'Saturday',        time:'11:00 AM – 11:30 PM',  open:true  },
-  };
-
-  const now      = new Date();
-  const dayIndex = now.getDay();
-  const today    = hours[dayIndex];
-
-  // Parse open/close times properly into total minutes since midnight
-  function parseTime(str) {
-    // e.g. "10:30 PM" or "11:00 AM"
-    const parts   = str.trim().match(/^(\d+):(\d+)\s*(AM|PM)$/i);
-    if (!parts) return 0;
-    let   h       = parseInt(parts[1]);
-    const m       = parseInt(parts[2]);
-    const period  = parts[3].toUpperCase();
-    if (period === 'PM' && h !== 12) h += 12;
-    if (period === 'AM' && h === 12) h = 0;
-    return h * 60 + m;
-  }
-
-  const timeParts  = today.time.split('–');
-  const openMins   = parseTime(timeParts[0]);
-  const closeMins  = parseTime(timeParts[1]);
-  const nowMins    = now.getHours() * 60 + now.getMinutes();
-  const isOpen     = nowMins >= openMins && nowMins <= closeMins;
-
-  const labelEl = document.getElementById('todayLabel');
-  const badgeEl = document.getElementById('todayBadge');
-  const timeEl  = document.getElementById('todayTime');
-
-  // Hero panel elements
-  const heroBadgeEl = document.getElementById('todayBadgeHero');
-  const heroTimeEl  = document.getElementById('todayTimeHero');
-
-  if(labelEl) labelEl.textContent = 'Today — ' + today.label;
-  if(timeEl)  timeEl.textContent  = today.time;
-  if(heroTimeEl) heroTimeEl.textContent = today.time;
-
-  const openStyles   = { bg:'rgba(34,180,34,0.18)',  color:'#4cd964',         border:'rgba(34,180,34,0.4)',  text:'Open Now'    };
-  const closedStyles = { bg:'rgba(237,34,38,0.18)', color:'#ff6b6b',         border:'rgba(237,34,38,0.4)', text:'Closed Now'  };
-  const s = isOpen ? openStyles : closedStyles;
-
-  [badgeEl, heroBadgeEl].forEach(el => {
-    if(!el) return;
-    el.textContent          = s.text;
-    el.style.background     = s.bg;
-    el.style.color          = s.color;
-    el.style.borderColor    = s.border;
-  });
-
-  // Also update the topbar "Open Today" text
-  const topbarLeft = document.querySelector('.topbar-left');
-  if(topbarLeft){
-    const spans = topbarLeft.querySelectorAll('span');
-    spans.forEach(s => {
-      if(s.textContent.includes('Open Today') || s.textContent.includes('Open till')){
-        s.textContent = isOpen
-          ? 'Open Today · ' + today.time
-          : 'Opens ' + today.time.split('–')[0].trim();
-      }
-    });
-  }
-})();
-</script>
-
 
 // Build WhatsApp message and open
 function bwBook(type){
